@@ -1,0 +1,121 @@
+1888–89,Preston North End
+1889–90,Preston North End
+1890–91,Everton
+1891–92,Sunderland
+1892–93,Sunderland
+1893–94,Aston Villa
+1894–95,Sunderland
+1895–96,Aston Villa
+1896–97,Aston Villa
+1897–98,Sheffield United
+1898–99,Aston Villa
+1899–1900,Aston Villa
+1900–01,Liverpool
+1901–02,Sunderland
+1902–03,The Wednesday
+1903–04,The Wednesday
+1904–05,Newcastle United
+1905–06,Liverpool
+1906–07,Newcastle United
+1907–08,Manchester United
+1908–09,Newcastle United
+1909–10,Aston Villa
+1910–11,Manchester United
+1911–12,Blackburn Rovers
+1912–13,Sunderland
+1913–14,Blackburn Rovers
+1914–15,Everton
+1919–20,West Bromwich Albion
+1920–21,Burnley
+1921–22,Liverpool
+1922–23,Liverpool
+1923–24,Huddersfield Town
+1924–25,Huddersfield Town
+1925–26,Huddersfield Town
+1926–27,Newcastle United
+1927–28,Everton
+1928–29,The Wednesday
+1929–30,Sheffield Wednesday
+1930–31,Arsenal
+1931–32,Everton
+1932–33,Arsenal
+1933–34,Arsenal
+1934–35,Arsenal
+1935–36,Sunderland
+1936–37,Manchester City
+1937–38,Arsenal
+1938–39,Everton
+1946–47,Liverpool
+1947–48,Arsenal
+1948–49,Portsmouth
+1949–50,Portsmouth
+1950–51,Tottenham Hotspur
+1951–52,Manchester United
+1952–53,Arsenal
+1953–54,Wolverhampton Wanderers
+1954–55,Chelsea
+1955–56,Manchester United
+1956–57,Manchester United
+1957–58,Wolverhampton Wanderers
+1958–59,Wolverhampton Wanderers
+1959–60,Burnley
+1960–61,Tottenham Hotspur
+1961–62,Ipswich Town
+1962–63,Everton
+1963–64,Liverpool
+1964–65,Manchester United
+1965–66,Liverpool
+1966–67,Manchester United
+1967–68,Manchester City
+1968–69,Leeds United
+1969–70,Everton
+1970–71,Arsenal
+1971–72,Derby County
+1972–73,Liverpool
+1973–74,Leeds United
+1974–75,Derby County
+1975–76,Liverpool
+1976–77,Liverpool
+1977–78,Nottingham Forest
+1978–79,Liverpool
+1979–80,Liverpool
+1980–81,Aston Villa
+1981–82,Liverpool
+1982–83,Liverpool
+1983–84,Liverpool
+1984–85,Everton
+1985–86,Liverpool
+1986–87,Everton
+1987–88,Liverpool
+1988–89,Arsenal
+1989–90,Liverpool
+1990–91,Arsenal
+1991–92,Leeds United
+1992-93,Manchester United
+1993-94,Manchester United
+1994-95,Blackburn Rovers
+1995-96,Manchester United
+1996-97,Manchester United
+1997-98,Arsenal
+1998-99,Manchester United
+1999-2000,Manchester United
+2000-01,Manchester United
+2001-02,Arsenal
+2002-03,Manchester United
+2003-04,Arsenal
+2004-05,Chelsea
+2005-06,Chelsea
+2006-07,Manchester United
+2007-08,Manchester United
+2008-09,Manchester United
+2009-10,Chelsea
+2010-11,Manchester United
+2011-12,Manchester City
+2012-13,Manchester United
+2013-14,Manchester City
+2014-15,Chelsea
+2015-16,Leicester City
+2016-17,Chelsea
+2017-18,Manchester City
+2018-19,Manchester City
+2019-20,Liverpool

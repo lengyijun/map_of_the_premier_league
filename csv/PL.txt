@@ -1,0 +1,28 @@
+1992-93,Manchester United
+1993-94,Manchester United
+1994-95,Blackburn Rovers
+1995-96,Manchester United
+1996-97,Manchester United
+1997-98,Arsenal
+1998-99,Manchester United
+1999-2000,Manchester United
+2000-01,Manchester United
+2001-02,Arsenal
+2002-03,Manchester United
+2003-04,Arsenal
+2004-05,Chelsea
+2005-06,Chelsea
+2006-07,Manchester United
+2007-08,Manchester United
+2008-09,Manchester United
+2009-10,Chelsea
+2010-11,Manchester United
+2011-12,Manchester City
+2012-13,Manchester United
+2013-14,Manchester City
+2014-15,Chelsea
+2015-16,Leicester City
+2016-17,Chelsea
+2017-18,Manchester City
+2018-19,Manchester City
+2019-20,Liverpool

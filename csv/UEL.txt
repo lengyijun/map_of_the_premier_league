@@ -1,0 +1,48 @@
+1971-72,Tottenham Hotspur
+1972-73,Liverpool
+1973-74,SC Feyenoord
+1974-75,Borussia Mönchengladbach
+1975-76,Liverpool 
+1976-77,Juventus FC
+1977-78,PSV Eindhoven
+1978-79,Borussia Mönchengladbach
+1979-80,Eintracht Frankfurt
+1980-81,Ipswich Town
+1981-82,IFK Göteborg
+1982-83,RSC Anderlecht
+1983-84,Tottenham Hotspur
+1984-85,Real Madrid
+1985-86,Real Madrid
+1986-87,IFK Göteborg
+1987-88,Bayer 04 Leverkusen
+1988-89,SSC Napoli
+1989-90,Juventus FC
+1990-91,FC Internazionale
+1991-92,Ajax Amsterdam
+1992-93,Juventus FC
+1993-94,FC Internazionale
+1994-95,AC Parma
+1995-96,Bayern Munich
+1996-97,FC Schalke 04
+1997-98,FC Internazionale
+1998-99,AC Parma
+1999-2000,Galatasaray SK
+2000-01,Liverpool 
+2001-02,Feyenoord Rotterdam
+2002-03,FC Porto
+2003-04,Valencia CF
+2004-05,CSKA Moscow
+2005-06,Sevilla FC
+2006-07,Sevilla FC
+2007-08,Zenit St. Petersburg
+2008-09,Shakhtar Donetsk
+2009-10,Atlético Madrid
+2010-11,FC Porto
+2011-12,Atlético Madrid
+2012-13,Chelsea
+2013-14,Sevilla FC
+2014-15,Sevilla FC
+2015-16,Sevilla FC
+2016-17,Manchester United
+2017-18,Atlético Madrid
+2018-19,Chelsea

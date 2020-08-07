@@ -1,0 +1,16 @@
+2000-01,Corinthians,0–0,Vasco da Gama,Necaxa,1–1,Real Madrid
+2005-06,São Paulo,1–0,Liverpool,Saprissa,3–2,Al-Ittihad
+2006-07,Internacional,1–0,Barcelona,Al Ahly,2–1,América
+2007-08,Milan,4–2,Boca Juniors,Urawa Red Diamonds,2–2,Étoile du Sahel
+2008-09,Manchester United,1–0,LDU Quito,Gamba Osaka,1–0,Pachuca
+2009-10,Barcelona,2–1,Estudiantes,Pohang Steelers,1–1,Atlante
+2010-11,Internazionale,3–0,TP Mazembe,Internacional,4–2,Seongnam Ilhwa Chunma
+2011-12,Barcelona,4–0,Santos,Al Sadd,0–0,Kashiwa Reysol
+2012-13,Corinthians,1–0,Chelsea,Monterrey,2–0,Al Ahly
+2013-14,Bayern Munich,2–0,Raja Casablanca,Atlético Mineiro,3–2,Guangzhou Evergrande
+2014-15,Real Madrid,2–0,San Lorenzo,Auckland City,1–1,Cruz Azul
+2015-16,Barcelona,3–0,River Plate,Sanfrecce Hiroshima,2–1,Guangzhou Evergrande
+2016-17,Real Madrid,4–2,Kashima Antlers,Atlético Nacional,2–2,América
+2017-18,Real Madrid,1–0,Grêmio,Pachuca,4–1,Al-Jazira
+2018-19,Real Madrid,4–1,Al-Ain,River Plate,4–0,Kashima Antlers
+2019-20,Liverpool,1–0,Flamengo,Monterrey,2–2,Al-Hilal

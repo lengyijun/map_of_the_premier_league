@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>英超地图 1992-2019</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=pvBQzudwqbcrYnoAHEorEnHVe8ouuL6w"></script>
+    <!-- <script type="text/javascript" src="//api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script> -->
+    <script src="js/autogenerate.js"></script>
+    <script src="js/gps.js"></script>
+    <script src="js/logo.js"></script>
+    <script src="js/promotion.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script src="js/i18next.min.js"></script>
+    <script src="js/i18nextXHRBackend.js"></script>
+    <script src="js/i18nextBrowserLanguageDetector.js"></script>
+  </head>
+
+  <body>
+    <style type="text/css">
+html{height:100%}
+body{height:100%;}
+#container{height:100%;}
+#promotion{
+  margin-left:10px;
+}
+#degradation{
+  margin-left:10px;
+}
+      #promotion_and_degradation{
+        margin-left:10px;
+      }
+    </style>
+    <div id="container"></div>
+
+    <script type="text/javascript">
+      console.log(logo)
+  console.log("source code: https://github.com/lengyijun/map_of_the_premier_league");
+  console.log("If you have any advice, feel free to put it here:  https://github.com/lengyijun/map_of_the_premier_league/issues");
+
+      i18next
+  .use(i18nextXHRBackend)
+  .use(i18nextBrowserLanguageDetector)
+  .init({
+    fallbackLng: 'zh',
+    debug: true,
+    ns: [ 'common'],
+    defaultNS: 'common',
+    backend: {
+      loadPath: 'locales/{{lng}}/{{ns}}.json',
+      crossDomain: true
+    }
+  }, function(err, t) {
+    // init set content
+    document.getElementById("ucl").title=i18next.t("title.UEFA Champion League");
+    document.getElementById("uel").title=i18next.t("title.UEFA Europa League");
+    document.getElementById("cwc").title=i18next.t("title.UEFA Cup Winners' Cup");
+    document.getElementById("pl").title=i18next.t("title.Premier League");
+    document.getElementById("fa").title=i18next.t("title.Football Association Challenge Cup");
+    document.getElementById("efl").title=i18next.t("title.English Football League Cup");
+    document.getElementById("fcwc").title=i18next.t("title.FIFA Club World Cup");
+
+    updateMap("2018-19");
+  });
+
+
+let map = new BMap.Map("container"); //初始化地图
+//温布利球场
+map.centerAndZoom(new BMap.Point( -0.279530, 51.556141 ), 8);
+map.enableScrollWheelZoom();//滚轮放大缩小。
+map.addControl(new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_RIGHT,type:BMAP_NAVIGATION_CONTROL_LARGE}));
+
+// 定义一个控件类，即function
+function SeasonControl(){
+  // 设置默认停靠位置和偏移量
+  this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
+  <!-- this.defaultOffset = new BMap.Size(10, 10);     -->
+}
+// 通过JavaScript的prototype属性继承于BMap.Control
+SeasonControl.prototype = new BMap.Control();
+// 自定义控件必须实现initialize方法，并且将控件的DOM元素返回
+// 在本方法中创建个div元素作为控件的容器，并将其添加到地图容器中
+SeasonControl.prototype.initialize = function(map){
+  let div=document.createElement("div");
+  let parser = new DOMParser();
+  const yearHtml=
+    `
+    <select id="year" onChange="updateMap(this.value);" >
+      <option value="2019-20">	2019-20</option>
+      <option value="2018-19" selected="selected">	2018-19</option>
+      <option value="2017-18">	2017-18</option>
+      <option value="2016-17">	2016-17</option>
+      <option value="2015-16">	2015-16</option>
+      <option value="2014-15">	2014-15</option>
+      <option value="2013-14">	2013-14</option>
+      <option value="2012-13">	2012-13</option>
+      <option value="2011-12">	2011-12</option>
+      <option value="2010-11">	2010-11</option>
+      <option value="2009-10">	2009-10</option>
+      <option value="2008-09">	2008-09</option>
+      <option value="2007-08">	2007-08</option>
+      <option value="2006-07">	2006-07</option>
+      <option value="2005-06">	2005-06</option>
+      <option value="2004-05">	2004-05</option>
+      <option value="2003-04">	2003-04</option>
+      <option value="2002-03">	2002-03</option>
+      <option value="2001-02">	2001-02</option>
+      <option value="2000-01">	2000-01</option>
+      <option value="1999-2000">	1999-2000</option>
+      <option value="1998-99">	1998-99</option>
+      <option value="1997-98">	1997-98</option>
+      <option value="1996-97">	1996-97</option>
+      <option value="1995-96">	1995-96</option>
+      <option value="1994-95">	1994-95</option>
+      <option value="1993-94">	1993-94</option>
+      <option value="1992-93">	1992-93</option>
+    </select>
+  `;
+
+  let honorHtml=`
+    <div id="honor">
+      <img id="ucl"  src="img/trophy-grey/ucl-trophy.svg" width="50px" />
+      <img id="pl"   src="img/trophy/pl-trophy.svg"  width="50px" />
+      <img id="uel"  src="img/trophy-grey/uel-trophy.svg" width="50px" />
+      <img id="cwc"  src="img/trophy-grey/cwc-trophy.svg" width="50px" />
+      <img id="fa"   src="img/trophy-grey/fa-trophy.svg"  width="50px" />
+      <img id="efl"  src="img/trophy-grey/efl-trophy.svg" width="50px" />
+      <img id="fcwc" src="img/trophy-grey/fcwc-trophy.svg" width="50px" />
+    </div>
+    `;
+
+  let year= parser.parseFromString(yearHtml, 'text/html');
+  year=year.body.firstChild;
+  let honor= parser.parseFromString(honorHtml, 'text/html');
+  honor=honor.body.firstChild;
+
+  div.style["margin-left"]="5px";
+  year.style["font-size"]="30px";
+  year.style["margin-top"]="10px";
+  honor.style["margin-top"]="5px";
+
+  div.appendChild(year);
+  div.appendChild(honor);
+
+  // 添加DOM元素到地图中
+  map.getContainer().appendChild(div);
+  // 将DOM元素返回
+  return div;
+}
+// 创建控件实例
+let mySeasonControl= new SeasonControl();
+// 添加到地图当中
+map.addControl(mySeasonControl);
+
+
+<!-- 视野,但是效果不好 -->
+<!-- let b = new BMap.Bounds(new BMap.Point( -5.643557, 50.084403 ),new BMap.Point( 0.04, 55.119193 )); -->
+<!-- try{ -->
+    <!-- BMapLib.AreaRestriction.setBounds(map, b); -->
+<!-- } catch (e) { -->
+    <!-- alert(e); -->
+<!-- } -->
+
+
+
+function _showTitleInfo(season) {
+  return function(marker,name,title){
+    marker.addEventListener("click",function(){
+      let sContent =
+         i18next.t('team.'+name)
+        + i18next.t('other.win')
+        + " "
+        + season
+        + " "
+        + i18next.t('title.'+title)
+        + i18next.t('other.champion')
+      let infoWindow = new BMap.InfoWindow(sContent,{enableMessage:false});// 创建信息窗口对象
+      marker.openInfoWindow(infoWindow);
+    });
+  }
+}
+
+
+
+function updateMap(season){
+  map.clearOverlays();
+  document.getElementById("ucl").onclick=undefined;
+  document.getElementById("uel").onclick=undefined;
+  document.getElementById("cwc").onclick=undefined;
+  document.getElementById("pl").onclick=undefined;
+  document.getElementById("fa").onclick=undefined;
+  document.getElementById("efl").onclick=undefined;
+  document.getElementById("fcwc").onclick=undefined;
+
+  document.getElementById("ucl").src="img/trophy-grey/ucl-trophy.svg";
+  document.getElementById("uel").src="img/trophy-grey/uel-trophy.svg";
+  document.getElementById("cwc").src="img/trophy-grey/cwc-trophy.svg";
+  document.getElementById("fa").src="img/trophy-grey/fa-trophy.svg";
+  document.getElementById("efl").src="img/trophy-grey/efl-trophy.svg";
+  document.getElementById("fcwc").src="img/trophy-grey/fcwc-trophy.svg";
+
+  const filename="PLdata/"+season+".json";
+  const year=parseInt(season);
+  let showTitleInfo=_showTitleInfo(season);
+
+
+  $.getJSON(filename,function(data){
+
+    const teams=data.tables[0].entries;
+    addMarker(teams);//添加标注。
+
+    function addMarker(points){  // 创建图标对象
+      let marker;
+      let heightOffset={};
+
+      teams.forEach((team,_1,_2) => {
+        let point;
+        const location=team.ground.location;
+        const name=team.team.name;
+        const groundName=team.ground.name;
+
+        function centerOnTeam(){
+          map.centerAndZoom(point, 20);
+        }
+
+        if(location!==undefined){
+          point = new BMap.Point(location.longitude,location.latitude);
+        }else{
+          const location=complementaryGPS[groundName];
+          point = new BMap.Point(location.longitude,location.latitude);
+        }
+
+        if(heightOffset[groundName]===undefined){
+          heightOffset[groundName]=25;
+        }
+        const anchor=new BMap.Size(25,heightOffset[groundName]);
+        heightOffset[groundName]-=50;
+
+        const iconImg= new BMap.Icon("./img/x2/"+team.team.altIds.opta+"@x2.png", new BMap.Size(50,50),{anchor})
+        marker = new BMap.Marker(point,{icon:iconImg});
+        map.addOverlay(marker);
+
+        let deltax=-26;
+        if(name===UCL_title[season]){
+          const uccImg= new BMap.Icon("img/trophy/ucl-trophy.svg", new BMap.Size(23,35),{anchor:new BMap.Size(deltax,15)});
+          const marker = new BMap.Marker(point,{icon:uccImg});
+          marker.setTitle(i18next.t("title."+ "UEFA Champion League"));
+          map.addOverlay(marker);
+          deltax-=24;
+          (showTitleInfo)(marker,name, "UEFA Champion League");
+          document.getElementById("ucl").onclick=centerOnTeam;
+          document.getElementById("ucl").src="img/trophy/ucl-trophy.svg";
+        }
+
+        if(name===PL_title[season]){
+          const uccImg= new BMap.Icon("img/trophy/pl-trophy.svg", new BMap.Size(23,35),{anchor:new BMap.Size(deltax,15)});
+          const marker = new BMap.Marker(point,{icon:uccImg});
+          marker.setTitle(i18next.t("title."+ "Premier League"));
+          map.addOverlay(marker);
+          deltax-=24;
+          (showTitleInfo)(marker,name, "Premier League");
+          document.getElementById("pl").onclick=centerOnTeam;
+
+          <!-- 改变地图配色 -->
+            <!-- $.getJSON(name+".json",function(styleJson){ -->
+                <!-- map.setMapStyle({styleJson:styleJson}); -->
+                <!-- }); -->
+
+        }
+
+        if(name===UEL_title[season]){
+          const uccImg= new BMap.Icon("img/trophy/uel-trophy.svg", new BMap.Size(23,35),{anchor:new BMap.Size(deltax,15)});
+          const marker = new BMap.Marker(point,{icon:uccImg});
+          marker.setTitle(i18next.t("title."+"UEFA Europa League" ));
+          map.addOverlay(marker);
+          deltax-=24;
+          (showTitleInfo)(marker,name,"UEFA Europa League" );
+          document.getElementById("uel").onclick=centerOnTeam;
+          document.getElementById("uel").src="img/trophy/uel-trophy.svg";
+        }
+
+        if(name===FA_title[season]){
+          const uccImg= new BMap.Icon("img/trophy/fa-trophy.svg", new BMap.Size(23,35),{anchor:new BMap.Size(deltax,15)});
+          const marker = new BMap.Marker(point,{icon:uccImg});
+          marker.setTitle(i18next.t("title."+ "Football Association Challenge Cup"));
+          map.addOverlay(marker);
+          deltax-=24;
+          (showTitleInfo)(marker,name, "Football Association Challenge Cup");
+          document.getElementById("fa").onclick=centerOnTeam;
+          document.getElementById("fa").src="img/trophy/fa-trophy.svg";
+        }
+
+        if(name===EFL_title[season]){
+          const uccImg= new BMap.Icon("img/trophy/efl-trophy.svg", new BMap.Size(23,35),{anchor:new BMap.Size(deltax,15)});
+          const marker = new BMap.Marker(point,{icon:uccImg});
+          marker.setTitle(i18next.t("title."+"English Football League Cup" ));
+          map.addOverlay(marker);
+          deltax-=24;
+          (showTitleInfo)(marker,name,"English Football League Cup" );
+          document.getElementById("efl").onclick=centerOnTeam;
+          document.getElementById("efl").src="img/trophy/efl-trophy.svg";
+        }
+
+        if(name===CWC_title[season]){
+          const uccImg= new BMap.Icon("img/trophy/cwc-trophy.svg", new BMap.Size(23,35),{anchor:new BMap.Size(deltax,15)});
+          const marker = new BMap.Marker(point,{icon:uccImg});
+          marker.setTitle(i18next.t("title."+"UEFA Cup Winners' Cup"));
+          map.addOverlay(marker);
+          deltax-=24;
+          (showTitleInfo)(marker,name, "UEFA Cup Winners' Cup");
+          document.getElementById("cwc").onclick=centerOnTeam;
+          document.getElementById("cwc").src="img/trophy/cwc-trophy.svg";
+        }
+
+        if(name===FCWC_title[season]){
+          const uccImg= new BMap.Icon("img/trophy/fcwc-trophy.svg", new BMap.Size(23,35),{anchor:new BMap.Size(deltax,15)});
+          const marker = new BMap.Marker(point,{icon:uccImg});
+          marker.setTitle(i18next.t("title."+"FIFA Club World Cup"));
+          map.addOverlay(marker);
+          deltax-=24;
+          (showTitleInfo)(marker,name, "FIFA Club World Cup");
+          document.getElementById("fcwc").onclick=centerOnTeam;
+          document.getElementById("fcwc").src="img/trophy/fcwc-trophy.svg";
+        }
+
+          <!-- //给标注点添加点击事件。使用立即执行函数和闭包 -->
+        (function() {
+          marker.addEventListener("click",function(){
+            showInfo(this,team);
+          });
+        })();
+
+      });
+    }
+
+    //显示信息窗口，显示标注点的信息。
+    function showInfo(thisMarker,team){
+      const name= team.team.name;
+      const position=team.position;
+
+        function isPromotion(){
+          return promotion[season].indexOf(name)>=0;
+        }
+        function isDegradation(){
+          return  (year==1994 && position>=19) || (year<1994 && position>=20) || (year>1994 && position>=18);
+        }
+
+
+      let pro_de_logo='';
+      if(isPromotion() && isDegradation()){
+        pro_de_logo= '<img id="promotion_and_degradation" src="img/promotion_and_degradation.svg" height="23px" title="'+i18next.t("other.promotion and degradation")+'" />';
+      }else if(isPromotion()){
+        pro_de_logo= '<img id="promotion" src="img/promotion.svg" height="23px" title="'+i18next.t("other.promotion")+'" />';
+      }else if(isDegradation()){
+        pro_de_logo= '<img id="degradation" src="img/degradation.svg" height="23px" title="'+i18next.t("other.degradation")+'"/>';
+      }
+
+
+
+      let pl_cnt=undefined;
+      if(PL_cnt[season]!==undefined){
+        pl_cnt=PL_cnt[season][name];
+      }
+      if(pl_cnt===undefined){
+        pl_cnt="-"
+      }
+      let eplContent=
+        '<tr>'
+        +'<th>'+i18next.t('other.'+"Premier League Title Count")+'</th>'
+        +'<td>'+ pl_cnt+'</td>'
+        +'</tr>';
+      if ( APL_latest[season][name]!==undefined ){
+        eplContent+=
+          '<tr>'
+          + '<th>'+i18next.t('other.'+"Latest Premier League Title")+'</th>'
+          + '<td>'+APL_latest[season][name]+'</td>'
+          +'</tr>';
+      }
+
+      if (all_latest_all[name]!==undefined ){
+        eplContent+=
+          '<tr>'
+          + '<th>'+i18next.t('other.'+"Latest Title")+'</th>'
+          + '<td>'+all_latest_all[name].year+" "+i18next.t('title.'+all_latest_all[name].title)+'</td>'
+          +'</tr>';
+      }
+
+
+      let ucl_list=undefined;
+      if(UCL_list[season]!==undefined){
+        ucl_list=UCL_list[season][name];
+      }
+      let uclContent="";
+      if(ucl_list!==undefined){
+        uclContent=
+        '<tr>'
+          + '<th>'+i18next.t('other.'+"UCL Title")+"("+ucl_list.length+"):"+'</th>'
+        + '<td>'+ucl_list+'</td>'
+        +'</tr>';
+      }
+
+      
+      let uel_list=undefined;
+      if(UEL_list[season]!==undefined){
+        uel_list=UEL_list[season][name];
+      }
+      let uelContent="";
+      if(uel_list!==undefined){
+        uelContent=
+        '<tr>'
+        +'<th>'+i18next.t('other.'+"UEL Title")+"("+uel_list.length+"):"+'</th>'
+        +'<td>'+ uel_list+'</td>'
+        +'</tr>';
+      }
+
+      let cwc_list=undefined;
+      if(CWC_list[season]!==undefined){
+        cwc_list=CWC_list[season][name];
+      }else{
+         cwc_list=CWC_list["1998-99"][name];
+      }
+      let cwcContent="";
+      if(cwc_list!==undefined){
+        cwcContent=
+        '<tr>'
+        +'<th>'+i18next.t('other.'+"CWC Title")+"("+cwc_list.length+"):"+'</th>'
+        +'<td>'+ cwc_list+'</td>'
+        +'</tr>';
+      }
+
+      let sContent =
+       '<h2>'
+        +i18next.t('team.'+name)
+        + pro_de_logo
+        +'</h2>'
+        + '<table border="0">'
+        + '<tr>'
+        + '<th>'+i18next.t('other.'+"Ground")+'</th>'
+        + '<td>'+team.ground.name+'('+team.ground.capacity+')'+'</td>'
+        + '</tr>'
+        + '<tr>'
+        + '<th>'+season+i18next.t('other.'+"Ranking")+'</th>'
+        + '<td>'+team.position+'</td>'
+        + '</tr>'
+        + eplContent
+        + uclContent
+        + uelContent
+        + cwcContent
+        +'</table>';
+
+
+      let infoWindow = new BMap.InfoWindow(sContent,{enableMessage:false});// 创建信息窗口对象
+      thisMarker.openInfoWindow(infoWindow);//图片加载完毕重绘infowindow
+    }
+
+
+  })
+}
+
+
+
+
+
+    </script>
+  </body>
+</html>
+
