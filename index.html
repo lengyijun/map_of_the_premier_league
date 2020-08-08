@@ -53,6 +53,7 @@
     console.log("If you have any advice, feel free to put it here:  https://github.com/lengyijun/map_of_the_premier_league/issues");
 
     const FA = "Football Association Challenge Cup";
+    const EFL = "English Football League Cup";
 
     i18next
         .use(i18nextXHRBackend)
@@ -192,6 +193,15 @@
                     sContent += i18next.t('team.' + x[2]);
                     sContent += "<br>";
                 }
+                if (title === EFL) {
+                    const x = EFL_final[season];
+                    sContent += i18next.t('team.' + x[0]);
+                    sContent += " ";
+                    sContent += x[1];
+                    sContent += " ";
+                    sContent += i18next.t('team.' + x[2]);
+                    sContent += "<br>";
+                }
                 sContent +=
                     i18next.t('team.' + name)
                     + i18next.t('other.win')
@@ -318,10 +328,10 @@
                     if (name === EFL_title[season]) {
                         const uccImg = new BMap.Icon("img/trophy/efl-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + "English Football League Cup"));
+                        marker.setTitle(i18next.t("title." + EFL));
                         map.addOverlay(marker);
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, "English Football League Cup");
+                        (showTitleInfo)(marker, name, EFL);
                         document.getElementById("efl").onclick = centerOnTeam;
                         document.getElementById("efl").src = "img/trophy/efl-trophy.svg";
                     }

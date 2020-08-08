@@ -42,3 +42,4 @@ if __name__ == '__main__':
     title('CWC.txt')
 
     final('FA.txt')
+    final('EFL.txt')
