@@ -2,6 +2,7 @@
 import csv
 import copy
 
+
 # 奖杯的数量
 def cnt(filename):
     mp={}
@@ -22,7 +23,7 @@ def cnt(filename):
     print(";")
 
 # 年份列表
-def title(filename):
+def title_list(filename):
     mp={}
     res={}
     x=filename.split(".")[0]
@@ -57,12 +58,35 @@ def final(filename):
     print(res,end="")
     print(";")
 
+# 年份:球队
+def title(filename):
+    res={}
+    x=filename.split(".")[0]
+    print("const "+x+"_title=",end="")
+    with open(filename, encoding='utf-8') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            season=row[0]
+            year=season.split("-")[0]
+            if(int(year)>=1992):
+                res[season]=row[1]
+    print(res,end="")
+    print(";")
+
 if __name__ == '__main__':
     cnt('PL.txt')
 
-    title('UCL.txt')
-    title('UEL.txt')
-    title('CWC.txt')
+    title_list('UCL.txt')
+    title_list('UEL.txt')
+    title_list('CWC.txt')
 
     final('FA.txt')
     final('EFL.txt')
+
+    title('PL.txt')
+    title('UCL.txt')
+    title('UEL.txt')
+    title('FA.txt')
+    title('EFL.txt')
+    title('FCWC.txt')
+    title('CWC.txt')

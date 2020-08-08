@@ -85,13 +85,13 @@ echo >> $OUTPUT
 
 latest APL
 
-title PL
-title UCL
-title UEL
-title FA
-title EFL
-title FCWC
-title CWC
+# title PL
+# title UCL
+# title UEL
+# title FA
+# title EFL
+# title FCWC
+# title CWC
 
 latest_all UCL.txt UEL.txt FA.txt EFL.txt FCWC.txt APL.txt CWC.txt
 
