@@ -147,7 +147,7 @@ SeasonControl.prototype.initialize = function(map){
   map.getContainer().appendChild(div);
   // 将DOM元素返回
   return div;
-}
+};
 // 创建控件实例
 let mySeasonControl= new SeasonControl();
 // 添加到地图当中
@@ -174,7 +174,7 @@ function _showTitleInfo(season) {
         + season
         + " "
         + i18next.t('title.'+title)
-        + i18next.t('other.champion')
+        + i18next.t('other.champion');
       let infoWindow = new BMap.InfoWindow(sContent,{enableMessage:false});// 创建信息窗口对象
       marker.openInfoWindow(infoWindow);
     });
@@ -237,7 +237,7 @@ function updateMap(season){
         const anchor=new BMap.Size(25,heightOffset[groundName]);
         heightOffset[groundName]-=50;
 
-        const iconImg= new BMap.Icon("./img/x2/"+team.team.altIds.opta+"@x2.png", new BMap.Size(50,50),{anchor})
+        const iconImg= new BMap.Icon("./img/x2/"+team.team.altIds.opta+"@x2.png", new BMap.Size(50,50),{anchor});
         marker = new BMap.Marker(point,{icon:iconImg});
         map.addOverlay(marker);
 
@@ -324,7 +324,6 @@ function updateMap(season){
           document.getElementById("fcwc").src="img/trophy/fcwc-trophy.svg";
         }
 
-          <!-- //给标注点添加点击事件。使用立即执行函数和闭包 -->
         (function() {
           marker.addEventListener("click",function(){
             showInfo(this,team);
@@ -343,7 +342,7 @@ function updateMap(season){
           return promotion[season].indexOf(name)>=0;
         }
         function isDegradation(){
-          return  (year==1994 && position>=19) || (year<1994 && position>=20) || (year>1994 && position>=18);
+          return  (year===1994 && position>=19) || (year<1994 && position>=20) || (year>1994 && position>=18);
         }
 
 
@@ -363,7 +362,7 @@ function updateMap(season){
         pl_cnt=PL_cnt[season][name];
       }
       if(pl_cnt===undefined){
-        pl_cnt="-"
+        pl_cnt="-";
       }
       let eplContent=
         '<tr>'
