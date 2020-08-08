@@ -6,28 +6,6 @@ set -u
 OUTPUT=../js/autogenerate.js
 rm -f $OUTPUT
 
-cnt(){
-  filename="$1.txt"
-  x=$1
-  awk '
-  BEGIN{ FS=","
-  printf("const %s_%s=\{","'$x'", "'${FUNCNAME[0]}'" ) }
-  {
-    map[$2]++
-      if($1>=1992){
-        printf("\"%s\":\{",$1)
-        for (var in map){
-          printf("\"%s\":\"%d\",",var,map[var])
-        }
-      print "\},"
-}
-}
-END{ print "\};" }
-' "$filename" | sed 's/,}/}/g'  >> $OUTPUT
-
-echo >> $OUTPUT
-}
-
 latest(){
   filename="$1.txt"
   x=$1
@@ -102,8 +80,8 @@ echo >> $OUTPUT
 # cnt UCL
 # cnt UEL
 
-cnt PL
-cnt FA
+# cnt PL
+# cnt FA
 
 latest APL
 
