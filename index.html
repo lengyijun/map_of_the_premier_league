@@ -47,9 +47,12 @@
 <div id="container"></div>
 
 <script type="text/javascript">
+    //show in console
     console.log(logo)
     console.log("source code: https://github.com/lengyijun/map_of_the_premier_league");
     console.log("If you have any advice, feel free to put it here:  https://github.com/lengyijun/map_of_the_premier_league/issues");
+
+    const FA = "Football Association Challenge Cup";
 
     i18next
         .use(i18nextXHRBackend)
@@ -179,7 +182,17 @@
     function _showTitleInfo(season) {
         return function (marker, name, title) {
             marker.addEventListener("click", function () {
-                let sContent =
+                let sContent = "";
+                if (title === FA) {
+                    const x = FA_final[season];
+                    sContent += i18next.t('team.' + x[0]);
+                    sContent += " ";
+                    sContent += x[1];
+                    sContent += " ";
+                    sContent += i18next.t('team.' + x[2]);
+                    sContent += "<br>";
+                }
+                sContent +=
                     i18next.t('team.' + name)
                     + i18next.t('other.win')
                     + " "
@@ -294,10 +307,10 @@
                     if (name === FA_title[season]) {
                         const uccImg = new BMap.Icon("img/trophy/fa-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + "Football Association Challenge Cup"));
+                        marker.setTitle(i18next.t("title." + FA));
                         map.addOverlay(marker);
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, "Football Association Challenge Cup");
+                        (showTitleInfo)(marker, name, FA);
                         document.getElementById("fa").onclick = centerOnTeam;
                         document.getElementById("fa").src = "img/trophy/fa-trophy.svg";
                     }
