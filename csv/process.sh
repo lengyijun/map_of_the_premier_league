@@ -59,22 +59,6 @@ END{
 echo >> $OUTPUT
 }
 
-title(){
-  filename="$1.txt"
-  x=$1
-  awk '
-  BEGIN{ FS=","
-  printf("const %s_%s=\{","'$x'", "'${FUNCNAME[0]}'" ) }
-  {
-      if($1>=1992){
-        printf("\"%s\":\"%s\",",$1,$2)
-  }
-}
-END{ print "\};" }
-' "$filename" | sed 's/,}/}/g'  >> $OUTPUT
-
-echo >> $OUTPUT
-}
 
 #use python script instead
 # cnt UCL
@@ -83,7 +67,7 @@ echo >> $OUTPUT
 # cnt PL
 # cnt FA
 
-latest APL
+# latest APL
 
 # title PL
 # title UCL

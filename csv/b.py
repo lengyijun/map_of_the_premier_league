@@ -73,6 +73,24 @@ def title(filename):
     print(res,end="")
     print(";")
 
+# 某项赛事的最后一座冠军
+def latest(filename):
+    mp={}
+    res={}
+    x=filename.split(".")[0]
+    print("const "+x+"_latest=",end="")
+    with open(filename, encoding='utf-8') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            season=row[0]
+            year=season.split("-")[0]
+            team=row[1]
+            mp[team]=season
+            if(int(year)>=1992):
+                res[season]=copy.deepcopy(mp)
+    print(res,end="")
+    print(";")
+
 if __name__ == '__main__':
     cnt('PL.txt')
 
@@ -90,3 +108,5 @@ if __name__ == '__main__':
     title('EFL.txt')
     title('FCWC.txt')
     title('CWC.txt')
+
+    latest('APL.txt')
