@@ -89,6 +89,7 @@
     let map = new BMap.Map("container"); //初始化地图
     //温布利球场
     map.centerAndZoom(new BMap.Point(-0.279530, 51.556141), 8);
+    map.setMinZoom(8);
     map.enableScrollWheelZoom();//滚轮放大缩小。
     map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_LARGE}));
 
