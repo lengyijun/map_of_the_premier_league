@@ -55,6 +55,6 @@ echo >> $OUTPUT
 # title FCWC
 # title CWC
 
-latest_all UCL.txt UEL.txt FA.txt EFL.txt FCWC.txt APL.txt CWC.txt
+#latest_all UCL.txt UEL.txt FA.txt EFL.txt FCWC.txt APL.txt CWC.txt
 
 python3 b.py >> $OUTPUT

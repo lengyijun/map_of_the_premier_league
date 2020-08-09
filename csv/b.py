@@ -2,6 +2,17 @@
 import csv
 import copy
 
+PL = "Premier League"
+APL = "Premier League"
+FA = "Football Association Challenge Cup"
+EFL = "English Football League Cup"
+UCL = "UEFA Champion League"
+UEL = "UEFA Europa League"
+CWC = "UEFA Cup Winners' Cup"
+FCWC = "FIFA Club World Cup"
+
+def season2year(season):
+    return int(season.split('-')[0])
 
 # 奖杯的数量
 def cnt(filename):
@@ -52,8 +63,7 @@ def final(filename):
         for row in reader:
             season=row[0]
             data=row[1:4]
-            year=season.split("-")[0]
-            if(int(year)>=1992):
+            if(season2year(season)>=1992):
                 res[season]=data
     print(res,end="")
     print(";")
@@ -67,8 +77,7 @@ def title(filename):
         reader = csv.reader(f)
         for row in reader:
             season=row[0]
-            year=season.split("-")[0]
-            if(int(year)>=1992):
+            if(season2year(season)>=1992):
                 res[season]=row[1]
     print(res,end="")
     print(";")
@@ -83,11 +92,35 @@ def latest(filename):
         reader = csv.reader(f)
         for row in reader:
             season=row[0]
-            year=season.split("-")[0]
             team=row[1]
             mp[team]=season
-            if(int(year)>=1992):
+            if(season2year(season)>=1992):
                 res[season]=copy.deepcopy(mp)
+    print(res,end="")
+    print(";")
+
+# 所有赛事的最后一座冠军
+def latest_all(* filenames):
+    res={}
+    print("const all_latest_all=",end="")
+    for filename in filenames:
+        title=filename.split(".")[0]
+        with open(filename, encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                season=row[0]
+                team=row[1]
+                if team in res:
+                    if season2year(season)>season2year(res[team]["season"]):
+                        x={}
+                        x["season"]=season
+                        x["title"]=eval(title)
+                        res[team]=x
+                else:
+                    x={}
+                    x["season"]=season
+                    x["title"]=eval(title)
+                    res[team]=x
     print(res,end="")
     print(";")
 
@@ -110,3 +143,4 @@ if __name__ == '__main__':
     title('CWC.txt')
 
     latest('APL.txt')
+    latest_all( "UCL.txt" ,"UEL.txt" ,"APL.txt","CWC.txt", "FCWC.txt","FA.txt", "EFL.txt"  )
