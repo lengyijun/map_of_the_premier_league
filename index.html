@@ -52,8 +52,13 @@
     console.log("source code: https://github.com/lengyijun/map_of_the_premier_league");
     console.log("If you have any advice, feel free to put it here:  https://github.com/lengyijun/map_of_the_premier_league/issues");
 
+    const PL = "Premier League";
     const FA = "Football Association Challenge Cup";
     const EFL = "English Football League Cup";
+    const UCL = "UEFA Champion League";
+    const UEL = "UEFA Europa League";
+    const CWC = "UEFA Cup Winners' Cup";
+    const FCWC = "FIFA Club World Cup";
 
     i18next
         .use(i18nextXHRBackend)
@@ -244,8 +249,10 @@
             const teams = data.tables[0].entries;
             addMarker(teams);//添加标注。
 
-            function addMarker(points) {  // 创建图标对象
+            function addMarker(teams) {  // 创建图标对象
                 let marker;
+                //处理重叠的球队,使用同一主场
+                //在英超,只有水晶宫和温布尔顿
                 let heightOffset = {};
 
                 teams.forEach((team, _1, _2) => {
@@ -279,10 +286,10 @@
                     if (name === UCL_title[season]) {
                         const uccImg = new BMap.Icon("img/trophy/ucl-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + "UEFA Champion League"));
+                        marker.setTitle(i18next.t("title." + UCL));
                         map.addOverlay(marker);
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, "UEFA Champion League");
+                        (showTitleInfo)(marker, name, UCL);
                         document.getElementById("ucl").onclick = centerOnTeam;
                         document.getElementById("ucl").src = "img/trophy/ucl-trophy.svg";
                     }
@@ -290,10 +297,10 @@
                     if (name === PL_title[season]) {
                         const uccImg = new BMap.Icon("img/trophy/pl-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + "Premier League"));
+                        marker.setTitle(i18next.t("title." + PL));
                         map.addOverlay(marker);
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, "Premier League");
+                        (showTitleInfo)(marker, name, PL);
                         document.getElementById("pl").onclick = centerOnTeam;
 
                         <!-- 改变地图配色 -->
@@ -306,10 +313,10 @@
                     if (name === UEL_title[season]) {
                         const uccImg = new BMap.Icon("img/trophy/uel-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + "UEFA Europa League"));
+                        marker.setTitle(i18next.t("title." + UEL));
                         map.addOverlay(marker);
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, "UEFA Europa League");
+                        (showTitleInfo)(marker, name, UEL);
                         document.getElementById("uel").onclick = centerOnTeam;
                         document.getElementById("uel").src = "img/trophy/uel-trophy.svg";
                     }
@@ -339,10 +346,10 @@
                     if (name === CWC_title[season]) {
                         const uccImg = new BMap.Icon("img/trophy/cwc-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + "UEFA Cup Winners' Cup"));
+                        marker.setTitle(i18next.t("title." + CWC));
                         map.addOverlay(marker);
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, "UEFA Cup Winners' Cup");
+                        (showTitleInfo)(marker, name, CWC);
                         document.getElementById("cwc").onclick = centerOnTeam;
                         document.getElementById("cwc").src = "img/trophy/cwc-trophy.svg";
                     }
@@ -350,10 +357,10 @@
                     if (name === FCWC_title[season]) {
                         const uccImg = new BMap.Icon("img/trophy/fcwc-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + "FIFA Club World Cup"));
+                        marker.setTitle(i18next.t("title." + FCWC));
                         map.addOverlay(marker);
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, "FIFA Club World Cup");
+                        (showTitleInfo)(marker, name, FCWC);
                         document.getElementById("fcwc").onclick = centerOnTeam;
                         document.getElementById("fcwc").src = "img/trophy/fcwc-trophy.svg";
                     }
