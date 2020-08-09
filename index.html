@@ -322,7 +322,7 @@
                         document.getElementById("uel").src = "img/trophy/uel-trophy.svg";
                     }
 
-                    if (name === FA_title[season]) {
+                    if (name === FA_final[season][0]) {
                         const uccImg = new BMap.Icon("img/trophy/fa-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
                         marker.setTitle(i18next.t("title." + FA));
@@ -333,7 +333,7 @@
                         document.getElementById("fa").src = "img/trophy/fa-trophy.svg";
                     }
 
-                    if (name === EFL_title[season]) {
+                    if (name === EFL_final[season][0]) {
                         const uccImg = new BMap.Icon("img/trophy/efl-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
                         marker.setTitle(i18next.t("title." + EFL));

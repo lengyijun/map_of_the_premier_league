@@ -149,8 +149,8 @@ if __name__ == '__main__':
     s+=title('PL.txt')
     s+=title('UCL.txt')
     s+=title('UEL.txt')
-    s+=title('FA.txt')
-    s+=title('EFL.txt')
+    #  s+=title('FA.txt')
+    #  s+=title('EFL.txt')
     s+=title('FCWC.txt')
     s+=title('CWC.txt')
 
