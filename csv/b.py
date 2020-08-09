@@ -2,6 +2,7 @@
 import csv
 import copy
 import json
+from collections import defaultdict
 
 OUTPUT="../js/autogenerate.js"
 
@@ -40,7 +41,7 @@ def cnt(filename):
 
 # 年份列表
 def title_list(filename):
-    mp={}
+    mp=defaultdict(list)
     res={}
     x=filename.split(".")[0]
     buffer= "const "+x+"_list="
@@ -49,11 +50,7 @@ def title_list(filename):
         for row in reader:
             season=row[0]
             team=row[1]
-            if team in mp:
-                mp[team].append(season)
-            else:
-                mp[team]=[]
-                mp[team].append(season)
+            mp[team].append(season)
             res[season]=copy.deepcopy(mp)
     buffer+=json.dumps(res)
     buffer+=";\n"
