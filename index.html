@@ -208,6 +208,15 @@
                     sContent += i18next.t('team.' + x[2]);
                     sContent += "<br>";
                 }
+                if (title === CWC) {
+                    const x = CWC_final[season];
+                    sContent += i18next.t('team.' + x[0]);
+                    sContent += " ";
+                    sContent += x[1];
+                    sContent += " ";
+                    sContent += i18next.t('team.' + x[2]);
+                    sContent += "<br>";
+                }
                 sContent +=
                     i18next.t('team.' + name)
                     + i18next.t('other.win')
@@ -344,7 +353,7 @@
                         document.getElementById("efl").src = "img/trophy/efl-trophy.svg";
                     }
 
-                    if (name === CWC_title[season]) {
+                    if (CWC_final[season]!==undefined && name === CWC_final[season][0]) {
                         const uccImg = new BMap.Icon("img/trophy/cwc-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
                         const marker = new BMap.Marker(point, {icon: uccImg});
                         marker.setTitle(i18next.t("title." + CWC));

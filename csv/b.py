@@ -145,6 +145,7 @@ if __name__ == '__main__':
 
     s+=final('FA.txt')
     s+=final('EFL.txt')
+    s+=final('CWC.txt')
 
     s+=title('PL.txt')
     s+=title('UCL.txt')
@@ -152,7 +153,7 @@ if __name__ == '__main__':
     #  s+=title('FA.txt')
     #  s+=title('EFL.txt')
     s+=title('FCWC.txt')
-    s+=title('CWC.txt')
+    #  s+=title('CWC.txt')
 
     s+=latest('APL.txt')
     s+=latest_all( "UCL.txt" ,"UEL.txt" ,"APL.txt","CWC.txt", "FCWC.txt","FA.txt", "EFL.txt"  )
