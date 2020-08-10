@@ -131,6 +131,21 @@ def latest_all(* filenames):
     buffer+=";\n"
     return buffer
 
+def derby():
+    filename="derby.csv"
+    multimp=[]
+    res={}
+    x=filename.split(".")[0]
+    with open(filename, encoding='utf-8') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if(row[0][0]=='#'):
+                continue
+            derbyName=row[0]
+            teams=row[1:]
+            multimp.append((derbyName,teams))
+    print(multimp)
+
 if __name__ == '__main__':
     s=""
 
@@ -147,10 +162,7 @@ if __name__ == '__main__':
     s+=title('PL.txt')
     s+=title('UCL.txt')
     s+=title('UEL.txt')
-    #  s+=title('FA.txt')
-    #  s+=title('EFL.txt')
     s+=title('FCWC.txt')
-    #  s+=title('CWC.txt')
 
     s+=latest('APL.txt')
     s+=latest_all( "UCL.txt" ,"UEL.txt" ,"APL.txt","CWC.txt", "FCWC.txt","FA.txt", "EFL.txt"  )
