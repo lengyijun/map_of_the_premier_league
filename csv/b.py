@@ -134,20 +134,35 @@ def latest_all(* filenames):
 def derby():
     filename="derby.csv"
     multimp=[]
-    res={}
+    mp=defaultdict(dict)
     x=filename.split(".")[0]
+    buffer="const derby="
     with open(filename, encoding='utf-8') as f:
         reader = csv.reader(f)
         for row in reader:
-            if(row[0][0]=='#'):
+            if row[0][0]=='#':
                 continue
             derbyName=row[0]
             teams=row[1:]
+            assert(len(teams)>=2)
             multimp.append((derbyName,teams))
-    print(multimp)
+    for (derby,teams) in multimp:
+        for team in teams:
+            if not(derby in mp[team]):
+                mp[team][derby]=[]
+            for otherteam in teams:
+                if otherteam!=team:
+                    mp[team][derby].append(otherteam)
+    buffer+=json.dumps(mp)
+    buffer+=";\n"
+    return buffer
+
+
 
 if __name__ == '__main__':
     s=""
+
+    s+=derby()
 
     s+=cnt('PL.txt')
 
