@@ -61,7 +61,7 @@ Or use other static HTTP server, such as nginx or [see](https://github.com/wyhay
 #### 更新数据
 ```
 cd csv
-./process.sh
+./b.py
 
 # generate the git in Readme
 convert -delay 120 -loop 0 *.png  out.gif
