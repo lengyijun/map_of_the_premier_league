@@ -45,6 +45,14 @@
     #promotion_and_degradation {
         margin-left: 10px;
     }
+      tr.separated td {
+      /* set border style for separated rows */
+      border-top: 1px solid black;
+  }
+  tr.separated th {
+      /* set border style for separated rows */
+      border-top: 1px solid black;
+  }
 </style>
 <div id="container"></div>
 
@@ -483,14 +491,24 @@
 
               let derbyContent="";
               if(derby[name]!==undefined){
-                Object.keys(derby[name]).forEach((derbyName,_1,_2)=>{
-                  let rivals=derby[name][derbyName].join(',')
-                  derbyContent+= '<tr>'
+                let keys=Object.keys(derby[name]);
+                for(let i=0;i<keys.length;i++){
+                  let derbyName=keys[i];
+                  let rivals=derby[name][derbyName].join(',');
+                  if(i===0){
+                  derbyContent+=
+                          '<tr class="separated">'
                         + '<th>' +derbyName + '</th>'
                         + '<td>' + rivals + '</td>'
                         + '</tr>';
-
-                });
+                  }else{
+                  derbyContent+=
+                          '<tr>'
+                        + '<th>' +derbyName + '</th>'
+                        + '<td>' + rivals + '</td>'
+                        + '</tr>';
+                  }
+                }
               }
 
                 let sContent =
