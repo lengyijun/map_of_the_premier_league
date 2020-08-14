@@ -481,6 +481,18 @@
                         + '</tr>';
                 }
 
+              let derbyContent="";
+              if(derby[name]!==undefined){
+                Object.keys(derby[name]).forEach((derbyName,_1,_2)=>{
+                  let rivals=derby[name][derbyName].join(',')
+                  derbyContent+= '<tr>'
+                        + '<th>' +derbyName + '</th>'
+                        + '<td>' + rivals + '</td>'
+                        + '</tr>';
+
+                });
+              }
+
                 let sContent =
                     '<h2>'
                     + i18next.t('team.' + name)
@@ -499,6 +511,7 @@
                     + uclContent
                     + uelContent
                     + cwcContent
+                    + derbyContent
                     + '</table>';
 
 
