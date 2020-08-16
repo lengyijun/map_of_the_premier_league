@@ -494,7 +494,11 @@
                 let keys=Object.keys(derby[name]);
                 for(let i=0;i<keys.length;i++){
                   let derbyName=keys[i];
-                  let rivals=derby[name][derbyName].join(',');
+                  let rivals_list=[];
+                  derby[name][derbyName].forEach((t,_1,_2)=>{
+                    rivals_list.push(i18next.t('team.'+t));
+                  });
+                  let rivals=rivals_list.join(',');
                   if(i===0){
                   derbyContent+=
                           '<tr class="separated">'
