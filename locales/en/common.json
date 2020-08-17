@@ -51,6 +51,13 @@
     "Wolverhampton Wanderers": "Wolverhampton Wanderers"
   },
   "englandTeam":{
+    "Preston North End": "Preston North End",
+    "Shrewsbury Town" : "Shrewsbury Town",
+    "Millwall": "Millwall",
+    "Leyton Orient":"Leyton Orient",
+    "Luton Town":"Luton Town",
+    "Brentford":"Brentford",
+    "Oxford United": "Oxford United"
   },
   "other": {
     "Latest Premier League Title": "Latest Premier League Title:",

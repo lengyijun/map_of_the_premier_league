@@ -51,6 +51,13 @@
     "Wolverhampton Wanderers": "狼队"
   },
   "englandTeam":{
+    "Preston North End": "普雷斯顿",
+    "Shrewsbury Town" : "什鲁斯伯里",
+    "Millwall": "米尔沃尔",
+    "Leyton Orient":"莱顿东方",
+    "Luton Town":"卢顿",
+    "Brentford":"布伦德福德",
+    "Oxford United": "牛津联"
   },
   "other": {
     "Latest Premier League Title": "最近一座联赛冠军：",
