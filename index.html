@@ -496,7 +496,7 @@
                   let derbyName=keys[i];
                   let rivals_list=[];
                   derby[name][derbyName].forEach((t,_1,_2)=>{
-                    rivals_list.push(i18next.t('team.'+t));
+                    rivals_list.push(i18next.t(['team.'+t,"englandTeam."+t]));
                   });
                   let rivals=rivals_list.join(',');
                   if(i===0){
