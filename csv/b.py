@@ -166,21 +166,22 @@ if __name__ == '__main__':
 
     s+=cnt('PL.txt')
 
-    s+=title_list('UCL.txt')
+    s+=title_list('UCL.csv')
     s+=title_list('UEL.txt')
     s+=title_list('CWC.txt')
 
     s+=final('FA.txt')
     s+=final('EFL.txt')
     s+=final('CWC.txt')
+    s+=final('UCL.csv')
 
     s+=title('PL.txt')
-    s+=title('UCL.txt')
+    s+=title('UCL.csv')
     s+=title('UEL.txt')
     s+=title('FCWC.txt')
 
     s+=latest('APL.txt')
-    s+=latest_all( "UCL.txt" ,"UEL.txt" ,"APL.txt","CWC.txt", "FCWC.txt","FA.txt", "EFL.txt"  )
+    s+=latest_all( "UCL.csv" ,"UEL.txt" ,"APL.txt","CWC.txt", "FCWC.txt","FA.txt", "EFL.txt"  )
 
     with open(OUTPUT,mode="w", encoding='utf-8') as f:
         f.write(s)

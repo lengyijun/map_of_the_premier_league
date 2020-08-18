@@ -206,7 +206,7 @@
                     sContent += " ";
                     sContent += x[1];
                     sContent += " ";
-                    sContent += i18next.t('team.' + x[2]);
+                    sContent += i18next.t('team.' + x[2],x[2]);
                     sContent += "<br>";
                 }
                 if (title === EFL) {
@@ -215,7 +215,7 @@
                     sContent += " ";
                     sContent += x[1];
                     sContent += " ";
-                    sContent += i18next.t('team.' + x[2]);
+                    sContent += i18next.t('team.' + x[2],x[2]);
                     sContent += "<br>";
                 }
                 if (title === CWC) {
@@ -224,7 +224,16 @@
                     sContent += " ";
                     sContent += x[1];
                     sContent += " ";
-                    sContent += i18next.t('team.' + x[2]);
+                    sContent += i18next.t('team.' + x[2],x[2]);
+                    sContent += "<br>";
+                }
+                if (title === UCL) {
+                    const x = UCL_final[season];
+                    sContent += i18next.t('team.' + x[0]);
+                    sContent += " ";
+                    sContent += x[1];
+                    sContent += " ";
+                    sContent += i18next.t('team.' + x[2],x[2]);
                     sContent += "<br>";
                 }
                 sContent +=
