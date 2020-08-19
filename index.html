@@ -236,6 +236,15 @@
                     sContent += i18next.t('team.' + x[2],x[2]);
                     sContent += "<br>";
                 }
+                if (title === UEL) {
+                    const x = UEL_final[season];
+                    sContent += i18next.t('team.' + x[0]);
+                    sContent += " ";
+                    sContent += x[1];
+                    sContent += " ";
+                    sContent += i18next.t('team.' + x[2],x[2]);
+                    sContent += "<br>";
+                }
                 sContent +=
                     i18next.t('team.' + name)
                     + i18next.t('other.win')

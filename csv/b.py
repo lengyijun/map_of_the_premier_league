@@ -49,6 +49,8 @@ def title_list(filename):
         reader = csv.reader(f)
         for row in reader:
             season=row[0]
+            if season[0]=='#':
+                continue
             team=row[1]
             mp[team].append(season)
             res[season]=copy.deepcopy(mp)
@@ -65,6 +67,8 @@ def final(filename):
         reader = csv.reader(f)
         for row in reader:
             season=row[0]
+            if season[0]=='#':
+                continue
             data=row[1:4]
             if(season2year(season)>=1992):
                 res[season]=data
@@ -81,6 +85,8 @@ def title(filename):
         reader = csv.reader(f)
         for row in reader:
             season=row[0]
+            if season[0]=='#':
+                continue
             if(season2year(season)>=1992):
                 res[season]=row[1]
     buffer+=json.dumps(res)
@@ -115,6 +121,8 @@ def latest_all(* filenames):
             reader = csv.reader(f)
             for row in reader:
                 season=row[0]
+                if season[0]=='#':
+                    continue
                 team=row[1]
                 if team in res:
                     if season2year(season)>season2year(res[team]["season"]):
@@ -167,21 +175,22 @@ if __name__ == '__main__':
     s+=cnt('PL.txt')
 
     s+=title_list('UCL.csv')
-    s+=title_list('UEL.txt')
+    s+=title_list('UEL.csv')
     s+=title_list('CWC.txt')
 
     s+=final('FA.txt')
     s+=final('EFL.txt')
     s+=final('CWC.txt')
     s+=final('UCL.csv')
+    s+=final('UEL.csv')
 
     s+=title('PL.txt')
     s+=title('UCL.csv')
-    s+=title('UEL.txt')
+    s+=title('UEL.csv')
     s+=title('FCWC.txt')
 
     s+=latest('APL.txt')
-    s+=latest_all( "UCL.csv" ,"UEL.txt" ,"APL.txt","CWC.txt", "FCWC.txt","FA.txt", "EFL.txt"  )
+    s+=latest_all( "UCL.csv" ,"UEL.csv" ,"APL.txt","CWC.txt", "FCWC.txt","FA.txt", "EFL.txt"  )
 
     with open(OUTPUT,mode="w", encoding='utf-8') as f:
         f.write(s)
