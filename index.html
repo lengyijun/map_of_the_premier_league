@@ -83,6 +83,8 @@
                 crossDomain: true
             }
         }, function (err, t) {
+           document.title=i18next.t( "documentTitle" );
+
             // init set content
             document.getElementById("ucl").title = i18next.t("title.UEFA Champion League");
             document.getElementById("uel").title = i18next.t("title.UEFA Europa League");
