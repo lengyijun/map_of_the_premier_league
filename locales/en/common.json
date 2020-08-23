@@ -62,15 +62,15 @@
   "other": {
     "Latest Premier League Title": "Latest Premier League Title:",
     "Latest Title": "Latest Title:",
-    "Ranking": "Ranking:",
+    "Ranking": " Ranking:",
     "Ground": "Ground:",
     "UCL Title": "UCL Title",
     "UEL Title": "UEL Title",
     "CWC Title": "CWC Title",
     "PL Title": "PL Title",
     "Premier League Title Count": "Premier League Title Count",
-    "win": "wins",
-    "champion": "champion",
+    "win": " wins",
+    "champion": " champion",
     "promotion and degradation": "Promotion and Degradation",
     "degradation": "Degradation",
     "promotion": "Promotion"
