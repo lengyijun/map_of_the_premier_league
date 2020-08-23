@@ -39,17 +39,19 @@ FCWC FIFA Club World Cup
 #### 目录架构
 
 ```
-├── csv                # origin data of js/
+├── csv/                  # origin csv file of js/ 
 ├── favicon.ico
-├── img
+├── screenshots/          # screenshots and gifs
+├── img/
 ├── index.html
-├── js
-├── locales            # multi language support
-├── map-style          # map style. uesless for now
-├── PLdata             # every season Premier League data
-└── README.md
-└── README.md
+├── js/
+├── locales/              # multi language support
+├── map-style/            # map style. uesless for now
+├── PLdata/               # every season Premier League data
+├── README.md
+└── README_zh.md
 ```
+
 
 
 

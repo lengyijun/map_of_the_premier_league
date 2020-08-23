@@ -38,15 +38,17 @@ FCWC 世俱杯
 #### 目录架构
 
 ```
-├── csv 每一年,各项赛事的冠军
+├── csv/                  # origin csv file of js/ 
 ├── favicon.ico
-├── img
+├── screenshots/          # screenshots and gifs
+├── img/
 ├── index.html
-├── js
-├── locales 多语言支持
-├── map-style 百度地图style,可以根据每年的冠军,更换地图配色,但是效果不太好
-├── PLdata 每个赛季的联赛数据
-└── README.md
+├── js/
+├── locales/              # multi language support
+├── map-style/            # map style. uesless for now
+├── PLdata/               # every season Premier League data
+├── README.md
+└── README_zh.md
 ```
 
 
