@@ -19,33 +19,35 @@
 
 
 #### 缩写解释
-UCL 欧冠
+UCL UEFA Champion League
 
-UEL 欧联
+UEL UEFA Europa League
 
-PL  英超
+PL  Premier League
 
-FA  足总杯
+FA  Football Association Challenge Cup
 
-EFL 联赛杯
+EFL English Football League Cup
 
 APL 老英甲
 
-CWC 优胜者杯
+CWC UEFA Cup Winners' Cup
 
-FCWC 世俱杯
+FCWC FIFA Club World Cup
+
 
 #### 目录架构
 
 ```
-├── csv 每一年,各项赛事的冠军
+├── csv                # origin data of js/
 ├── favicon.ico
 ├── img
 ├── index.html
 ├── js
-├── locales 多语言支持
-├── map-style 百度地图style,可以根据每年的冠军,更换地图配色,但是效果不太好
-├── PLdata 每个赛季的联赛数据
+├── locales            # multi language support
+├── map-style          # map style. uesless for now
+├── PLdata             # every season Premier League data
+└── README.md
 └── README.md
 ```
 
