@@ -1,42 +1,50 @@
-# 英超地图
+# Premier League Map
 
-![gif](./gif/out.gif)
+![gif](screenshots/out.gif)
 
 
-#### 介绍
-1992-2018 英超地图(联赛,欧冠,欧联,足总杯,联赛杯,世俱杯,优胜者杯)
+#### Introduction
+From 1992 to this season, the Premier League teams and their home courts are mapped.
+
+Click on the team icon to see the data of the Champions League, Europa League, Champions Cup, Premier League, FA Cup, Club World Cup.
+
+Click on the trophy in the upper left corner to jump to the team.
+
+Click on the team crest to see the historical honors as of the current season.
+
+Data from the premier league website and Wikipedia.
+
 
 #### Feature
-- 球队定位到球队当赛季的主场
-- 当赛季的荣誉
-- 截至该赛季的最后一个冠军
-- 截至该赛季的最后一个联赛冠军
-- 欧战的夺冠次数和年份
-- 升降级信息
+- The team is positioned to the home court of the season
+- Honors of the season
+- To the last champion
+- To the last league title of the season
+- The number and year of each Championship
+- Promotion and degration
+- Derby opponents
 
 #### How to use ?
-![gif](./record.gif)
+![gif](screenshots/record.gif)
 
 
-#### 缩写解释
-UCL UEFA Champion League
+#### Abbreviation 
 
-UEL UEFA Europa League
-
-PL  Premier League
-
-FA  Football Association Challenge Cup
-
-EFL English Football League Cup
-
-APL 老英甲
-
-CWC UEFA Cup Winners' Cup
-
-FCWC FIFA Club World Cup
+| Abbr | Full Name                          |
+| ---- | ---------------------------------- |
+| UCL  | UEFA Champion League               |
+| UEL  | UEFA Europa League                 |
+| PL   | Premier League                     |
+| FA   | Football Association Challenge Cup |
+| EFL  | English Football League Cup        |
+| APL  | Football League First Division     |
+| CWC  | UEFA Cup Winners' Cup              |
+| FCWC | FIFA Club World Cup                |
 
 
-#### 目录架构
+
+
+#### Project structure
 
 ```
 ├── csv/                  # origin csv file of js/ 
@@ -55,19 +63,24 @@ FCWC FIFA Club World Cup
 
 
 
-#### 安装教程
+#### Run in localhost
 
 ```
 python3 -m http.server
 ```
 Or use other static HTTP server, such as nginx or [see](https://github.com/wyhaya/see)
 
-#### 更新数据
+#### Generate js from .csv file
 ```
 cd csv
 ./b.py
+```
 
-# generate the git in Readme
+#### Generate the gif in Readme.md
+```
+cd screenshots
 convert -delay 120 -loop 0 *.png  out.gif
 ```
 
+#### Contribution
+This website is far from perfect. If I made some mistake or you have any advice, feel free to submit a issue.
