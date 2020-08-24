@@ -75,6 +75,9 @@ Or use other static HTTP server, such as nginx or [see](https://github.com/wyhay
 ```
 cd csv
 ./b.py
+
+cd PLdata
+./promotion.sh > ../js/promotion.js
 ```
 
 #### Generate the gif in Readme.md
