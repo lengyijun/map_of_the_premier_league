@@ -2,14 +2,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="description" content="英超球队都在哪里?英超地图可视化的展示了从1992-2019每个赛季的英超球队主场分布.点击球队队徽可以看到当赛季球队的荣誉(欧冠，欧联，优胜者杯，英超，足总杯，联赛杯，世俱杯)和历史荣誉(最近一座冠军,最近一座联赛冠军)">
-    <meta name="keywords" content="英超球队分布,英超地图,英超地理,英超历史,英超分布,英超俱乐部地图,英超球队地理分布,英超球队所在地,英超20强,英格兰足球地图" />
-    <title>英超地图 1992-2019</title>
+    <meta name="description"
+          content="Where are the Premier League teams? The map of the Premier League visually shows the home distribution of Premier League teams from 1992 to 2019. Click on the team emblem to see the team's Honors (Champions League, Europa League, cup of winners, Premier League, FA Cup, League Cup, World Club Cup) and historical Honors (the latest champion, the latest League champion)">
+    <meta name="keywords" content="premier league map,premier league map london"/>
+    <title>Premier League Map 1992-2019</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
-    <script type="text/javascript"
-            src="https://api.map.baidu.com/api?v=2.0&ak=pvBQzudwqbcrYnoAHEorEnHVe8ouuL6w"></script>
-    <!-- <script type="text/javascript" src="//api.map.baidu.com/library/AreaRestriction/1.2/src/AreaRestriction_min.js"></script> -->
+    <script type='text/javascript'
+            src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=Auy9xHwMXHj0vmXv-4kKjiMhM5XpcDGnDy5-BnVGSMD_Ekpt4P9DW1XnHNBf_Gz3'
+            async defer></script>
     <script src="js/autogenerate.js"></script>
     <script src="js/gps.js"></script>
     <script src="js/derby.js"></script>
@@ -47,18 +48,86 @@
     #promotion_and_degradation {
         margin-left: 10px;
     }
-      tr.separated td {
-      /* set border style for separated rows */
-      border-top: 1px solid black;
+
+    tr.separated td {
+        /* set border style for separated rows */
+        border-top: 1px solid black;
+    }
+
+    tr.separated th {
+        /* set border style for separated rows */
+        border-top: 1px solid black;
+    }
+    #controller{
+  height:35px;
+  top:30px;
+  left:30px;
+  position:absolute;
+  z-index:9999;
+  margin-top:10px;
+    }
+    #year{
+  height:35px;
+  border:1px solid blue;
+  font-size:30px;
+  background-color:#FFFFFF;}
+  #honor{
+    margin-top:5px;
   }
-  tr.separated th {
-      /* set border style for separated rows */
-      border-top: 1px solid black;
-  }
+
 </style>
 <div id="container"></div>
 
+<div id="controller">
+<select id="year" onChange="updateMap(this.value);">
+  <option value="2020-21">2020-21</option>
+  <option value="2019-20" selected="selected">2019-20</option>
+  <option value="2018-19">	2018-19</option>
+  <option value="2017-18">	2017-18</option>
+  <option value="2016-17">	2016-17</option>
+  <option value="2015-16">	2015-16</option>
+  <option value="2014-15">	2014-15</option>
+  <option value="2013-14">	2013-14</option>
+  <option value="2012-13">	2012-13</option>
+  <option value="2011-12">	2011-12</option>
+  <option value="2010-11">	2010-11</option>
+  <option value="2009-10">	2009-10</option>
+  <option value="2008-09">	2008-09</option>
+  <option value="2007-08">	2007-08</option>
+  <option value="2006-07">	2006-07</option>
+  <option value="2005-06">	2005-06</option>
+  <option value="2004-05">	2004-05</option>
+  <option value="2003-04">	2003-04</option>
+  <option value="2002-03">	2002-03</option>
+  <option value="2001-02">	2001-02</option>
+  <option value="2000-01">	2000-01</option>
+  <option value="1999-2000">	1999-2000</option>
+  <option value="1998-99">	1998-99</option>
+  <option value="1997-98">	1997-98</option>
+  <option value="1996-97">	1996-97</option>
+  <option value="1995-96">	1995-96</option>
+  <option value="1994-95">	1994-95</option>
+  <option value="1993-94">	1993-94</option>
+  <option value="1992-93">	1992-93</option>
+</select>
+
+<div id="honor">
+  <img id="ucl"  src="img/trophy-grey/ucl-trophy.svg" width="50px" />
+  <img id="pl"   src="img/trophy-grey/pl-trophy.svg"  width="50px" />
+  <img id="uel"  src="img/trophy-grey/uel-trophy.svg" width="50px" />
+  <img id="cwc"  src="img/trophy-grey/cwc-trophy.svg" width="50px" />
+  <img id="fa"   src="img/trophy-grey/fa-trophy.svg"  width="50px" />
+  <img id="efl"  src="img/trophy-grey/efl-trophy.svg" width="50px" />
+  <img id="fcwc" src="img/trophy-grey/fcwc-trophy.svg" width="50px" />
+</div>
+</div>
+
+
+
+
 <script type="text/javascript">
+    var map;
+
     //show in console
     console.log(logo)
     console.log("source code: https://github.com/lengyijun/map_of_the_premier_league");
@@ -72,201 +141,105 @@
     const CWC = "UEFA Cup Winners' Cup";
     const FCWC = "FIFA Club World Cup";
 
-    i18next
-        .use(i18nextXHRBackend)
-        .use(i18nextBrowserLanguageDetector)
-        .init({
-            fallbackLng: 'zh',
-            debug: true,
-            ns: ['common'],
-            defaultNS: 'common',
-            backend: {
-                loadPath: 'locales/{{lng}}/{{ns}}.json',
-                crossDomain: true
-            }
-        }, function (err, t) {
-           document.title=i18next.t( "documentTitle" );
 
-            // init set content
-            document.getElementById("ucl").title = i18next.t("title.UEFA Champion League");
-            document.getElementById("uel").title = i18next.t("title.UEFA Europa League");
-            document.getElementById("cwc").title = i18next.t("title.UEFA Cup Winners' Cup");
-            document.getElementById("pl").title = i18next.t("title.Premier League");
-            document.getElementById("fa").title = i18next.t("title.Football Association Challenge Cup");
-            document.getElementById("efl").title = i18next.t("title.English Football League Cup");
-            document.getElementById("fcwc").title = i18next.t("title.FIFA Club World Cup");
-
-            updateMap("2019-20");
+    function GetMap() {
+        map = new Microsoft.Maps.Map('#container', {
+            center: new Microsoft.Maps.Location(51.556141, -0.279530),
+            zoom: 7,
+            minZoom: 7
         });
+        <!-- map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_LARGE})); -->
 
+        i18next
+            .use(i18nextXHRBackend)
+            .use(i18nextBrowserLanguageDetector)
+            .init({
+                fallbackLng: 'en',
+                debug: true,
+                ns: ['common'],
+                defaultNS: 'common',
+                backend: {
+                    loadPath: 'locales/{{lng}}/{{ns}}.json',
+                    crossDomain: true
+                }
+            }, function (err, t) {
+                document.title = i18next.t("documentTitle");
 
-    let map = new BMap.Map("container"); //初始化地图
-    //温布利球场
-    map.centerAndZoom(new BMap.Point(-0.279530, 51.556141), 8);
-    map.setMinZoom(8);
-    map.enableScrollWheelZoom();//滚轮放大缩小。
-    map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_LARGE}));
+                // init set content
+                document.getElementById("ucl").title = i18next.t("title.UEFA Champion League");
+                document.getElementById("uel").title = i18next.t("title.UEFA Europa League");
+                document.getElementById("cwc").title = i18next.t("title.UEFA Cup Winners' Cup");
+                document.getElementById("pl").title = i18next.t("title.Premier League");
+                document.getElementById("fa").title = i18next.t("title.Football Association Challenge Cup");
+                document.getElementById("efl").title = i18next.t("title.English Football League Cup");
+                document.getElementById("fcwc").title = i18next.t("title.FIFA Club World Cup");
 
-    // 定义一个控件类，即function
-    function SeasonControl() {
-        // 设置默认停靠位置和偏移量
-        this.defaultAnchor = BMAP_ANCHOR_TOP_LEFT;
-        <!-- this.defaultOffset = new BMap.Size(10, 10);     -->
+                updateMap("2019-20");
+            });
+
     }
-
-    // 通过JavaScript的prototype属性继承于BMap.Control
-    SeasonControl.prototype = new BMap.Control();
-    // 自定义控件必须实现initialize方法，并且将控件的DOM元素返回
-    // 在本方法中创建个div元素作为控件的容器，并将其添加到地图容器中
-    SeasonControl.prototype.initialize = function (map) {
-        let div = document.createElement("div");
-        let parser = new DOMParser();
-        const yearHtml =
-            `
-    <select id="year" onChange="updateMap(this.value);" >
-      <option value="2020-21">2020-21</option>
-      <option value="2019-20" selected="selected">2019-20</option>
-      <option value="2018-19">2018-19</option>
-      <option value="2017-18">2017-18</option>
-      <option value="2016-17">2016-17</option>
-      <option value="2015-16">2015-16</option>
-      <option value="2014-15">2014-15</option>
-      <option value="2013-14">2013-14</option>
-      <option value="2012-13">2012-13</option>
-      <option value="2011-12">2011-12</option>
-      <option value="2010-11">2010-11</option>
-      <option value="2009-10">2009-10</option>
-      <option value="2008-09">2008-09</option>
-      <option value="2007-08">2007-08</option>
-      <option value="2006-07">2006-07</option>
-      <option value="2005-06">2005-06</option>
-      <option value="2004-05">2004-05</option>
-      <option value="2003-04">2003-04</option>
-      <option value="2002-03">2002-03</option>
-      <option value="2001-02">2001-02</option>
-      <option value="2000-01">2000-01</option>
-      <option value="1999-2000">1999-2000</option>
-      <option value="1998-99">1998-99</option>
-      <option value="1997-98">1997-98</option>
-      <option value="1996-97">1996-97</option>
-      <option value="1995-96">1995-96</option>
-      <option value="1994-95">1994-95</option>
-      <option value="1993-94">1993-94</option>
-      <option value="1992-93">1992-93</option>
-    </select>
-  `;
-
-        let honorHtml = `
-    <div id="honor">
-      <img id="ucl"  src="img/trophy-grey/ucl-trophy.svg" width="50px" />
-      <img id="pl"   src="img/trophy-grey/pl-trophy.svg"  width="50px" />
-      <img id="uel"  src="img/trophy-grey/uel-trophy.svg" width="50px" />
-      <img id="cwc"  src="img/trophy-grey/cwc-trophy.svg" width="50px" />
-      <img id="fa"   src="img/trophy-grey/fa-trophy.svg"  width="50px" />
-      <img id="efl"  src="img/trophy-grey/efl-trophy.svg" width="50px" />
-      <img id="fcwc" src="img/trophy-grey/fcwc-trophy.svg" width="50px" />
-    </div>
-    `;
-
-        let year = parser.parseFromString(yearHtml, 'text/html');
-        year = year.body.firstChild;
-        let honor = parser.parseFromString(honorHtml, 'text/html');
-        honor = honor.body.firstChild;
-
-        div.style["margin-left"] = "5px";
-        year.style["font-size"] = "30px";
-        year.style["margin-top"] = "10px";
-        honor.style["margin-top"] = "5px";
-
-        div.appendChild(year);
-        div.appendChild(honor);
-
-        // 添加DOM元素到地图中
-        map.getContainer().appendChild(div);
-        // 将DOM元素返回
-        return div;
-    };
-    // 创建控件实例
-    let mySeasonControl = new SeasonControl();
-    // 添加到地图当中
-    map.addControl(mySeasonControl);
-
-
-    <!-- 视野,但是效果不好 -->
-    <!-- let b = new BMap.Bounds(new BMap.Point( -5.643557, 50.084403 ),new BMap.Point( 0.04, 55.119193 )); -->
-    <!-- try{ -->
-    <!-- BMapLib.AreaRestriction.setBounds(map, b); -->
-    <!-- } catch (e) { -->
-    <!-- alert(e); -->
-    <!-- } -->
 
 
     function _showTitleInfo(season) {
-        return function (marker, name, title) {
-            marker.addEventListener("click", function () {
-                let sContent = "";
-                if (title === FA) {
-                    const x = FA_final[season];
-                    sContent += i18next.t('team.' + x[0]);
-                    sContent += " ";
-                    sContent += x[1];
-                    sContent += " ";
-                    sContent += i18next.t('team.' + x[2],x[2]);
-                    sContent += "<br>";
-                }
-                if (title === EFL) {
-                    const x = EFL_final[season];
-                    sContent += i18next.t('team.' + x[0]);
-                    sContent += " ";
-                    sContent += x[1];
-                    sContent += " ";
-                    sContent += i18next.t('team.' + x[2],x[2]);
-                    sContent += "<br>";
-                }
-                if (title === CWC) {
-                    const x = CWC_final[season];
-                    sContent += i18next.t('team.' + x[0]);
-                    sContent += " ";
-                    sContent += x[1];
-                    sContent += " ";
-                    sContent += i18next.t('team.' + x[2],x[2]);
-                    sContent += "<br>";
-                }
-                if (title === UCL) {
-                    const x = UCL_final[season];
-                    sContent += i18next.t('team.' + x[0]);
-                    sContent += " ";
-                    sContent += x[1];
-                    sContent += " ";
-                    sContent += i18next.t('team.' + x[2],x[2]);
-                    sContent += "<br>";
-                }
-                if (title === UEL) {
-                    const x = UEL_final[season];
-                    sContent += i18next.t('team.' + x[0]);
-                    sContent += " ";
-                    sContent += x[1];
-                    sContent += " ";
-                    sContent += i18next.t('team.' + x[2],x[2]);
-                    sContent += "<br>";
-                }
-                sContent +=
-                    i18next.t('team.' + name)
-                    + i18next.t('other.win')
-                    + " "
-                    + season
-                    + " "
-                    + i18next.t('title.' + title)
-                    + i18next.t('other.champion');
-                let infoWindow = new BMap.InfoWindow(sContent, {enableMessage: false});// 创建信息窗口对象
-                marker.openInfoWindow(infoWindow);
-            });
+        return function (name, title) {
+            let sContent = "";
+            if (title === FA) {
+                const x = FA_final[season];
+                sContent += i18next.t('team.' + x[0]);
+                sContent += " ";
+                sContent += x[1];
+                sContent += " ";
+                sContent += i18next.t('team.' + x[2], x[2]);
+                sContent += "<br>";
+            } else if (title === EFL) {
+                const x = EFL_final[season];
+                sContent += i18next.t('team.' + x[0]);
+                sContent += " ";
+                sContent += x[1];
+                sContent += " ";
+                sContent += i18next.t('team.' + x[2], x[2]);
+                sContent += "<br>";
+            } else if (title === CWC) {
+                const x = CWC_final[season];
+                sContent += i18next.t('team.' + x[0]);
+                sContent += " ";
+                sContent += x[1];
+                sContent += " ";
+                sContent += i18next.t('team.' + x[2], x[2]);
+                sContent += "<br>";
+            } else if (title === UCL) {
+                const x = UCL_final[season];
+                sContent += i18next.t('team.' + x[0]);
+                sContent += " ";
+                sContent += x[1];
+                sContent += " ";
+                sContent += i18next.t('team.' + x[2], x[2]);
+                sContent += "<br>";
+            } else if (title === UEL) {
+                const x = UEL_final[season];
+                sContent += i18next.t('team.' + x[0]);
+                sContent += " ";
+                sContent += x[1];
+                sContent += " ";
+                sContent += i18next.t('team.' + x[2], x[2]);
+                sContent += "<br>";
+            }
+            sContent +=
+                i18next.t('team.' + name)
+                + i18next.t('other.win')
+                + " "
+                + season
+                + " "
+                + i18next.t('title.' + title)
+                + i18next.t('other.champion');
+            return sContent;
         }
     }
 
 
     function updateMap(season) {
-        map.clearOverlays();
+        map.entities.clear();
+
         document.getElementById("ucl").onclick = undefined;
         document.getElementById("uel").onclick = undefined;
         document.getElementById("cwc").onclick = undefined;
@@ -294,9 +267,8 @@
             addMarker(teams);//添加标注。
 
             function addMarker(teams) {  // 创建图标对象
-                let marker;
                 //处理重叠的球队,使用同一主场
-                //在英超,只有水晶宫和温布尔顿
+                //在英超,只有水晶宫和温布尔登
                 let heightOffset = {};
 
                 teams.forEach((team, _1, _2) => {
@@ -306,121 +278,171 @@
                     const groundName = team.ground.name;
 
                     function centerOnTeam() {
-                        map.centerAndZoom(point, 20);
+                      map.setView({center:point,zoom:20});
                     }
 
                     if (location !== undefined) {
-                        point = new BMap.Point(location.longitude, location.latitude);
+                        point = new Microsoft.Maps.Location(location.latitude, location.longitude);
                     } else {
                         const location = complementaryGPS[groundName];
-                        point = new BMap.Point(location.longitude, location.latitude);
+                        point = new Microsoft.Maps.Location(location.latitude, location.longitude);
                     }
 
                     if (heightOffset[groundName] === undefined) {
                         heightOffset[groundName] = 25;
                     }
-                    const anchor = new BMap.Size(25, heightOffset[groundName]);
+                    const anchor = new Microsoft.Maps.Point(25, heightOffset[groundName]);
                     heightOffset[groundName] -= 50;
 
-                    const iconImg = new BMap.Icon("./img/x2/" + team.team.altIds.opta + "@x2.png", new BMap.Size(50, 50), {anchor});
-                    marker = new BMap.Marker(point, {icon: iconImg});
-                    map.addOverlay(marker);
+                    let pushpin = new Microsoft.Maps.Pushpin(point, {
+                        icon: "./img/x2/" + team.team.altIds.opta + "@x2.png",
+                        anchor
+                    })
+                    let description = getTeamInfo(team);
+                    let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false,maxWidth:300,maxHeight:500});
+                    infobox.setMap(map);
+                    Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({visible: true});
+                    });
+                    map.entities.push(pushpin);
 
                     let deltax = -26;
+
                     if (name === UCL_title[season]) {
-                        const uccImg = new BMap.Icon("img/trophy/ucl-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
-                        const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + UCL));
-                        map.addOverlay(marker);
+                        let pushpin = new Microsoft.Maps.Pushpin(point, {
+                            icon: "img/trophy/ucl-trophy.svg",
+                            anchor: new Microsoft.Maps.Point(deltax, 15)
+                        })
+                        let description = showTitleInfo(name, UCL);
+                        let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false});
+                        infobox.setMap(map);
+                        Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({ visible: true });
+                        });
+                        map.entities.push(pushpin);
+
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, UCL);
                         document.getElementById("ucl").onclick = centerOnTeam;
                         document.getElementById("ucl").src = "img/trophy/ucl-trophy.svg";
                     }
 
                     if (name === PL_title[season]) {
-                        const uccImg = new BMap.Icon("img/trophy/pl-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
-                        const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + PL));
-                        map.addOverlay(marker);
+                        let pushpin = new Microsoft.Maps.Pushpin(point, {
+                            icon: "img/trophy/pl-trophy.svg",
+                            anchor: new Microsoft.Maps.Point(deltax, 15)
+                        })
+                        let description = showTitleInfo(name, PL);
+                        let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false});
+                        infobox.setMap(map);
+                        Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({ visible: true });
+                        });
+                        map.entities.push(pushpin);
+
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, PL);
+
                         document.getElementById("pl").onclick = centerOnTeam;
                         document.getElementById("pl").src = "img/trophy/pl-trophy.svg";
-
-                        <!-- 改变地图配色 -->
-                        <!-- $.getJSON(name+".json",function(styleJson){ -->
-                        <!-- map.setMapStyle({styleJson:styleJson}); -->
-                        <!-- }); -->
 
                     }
 
                     if (name === UEL_title[season]) {
-                        const uccImg = new BMap.Icon("img/trophy/uel-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
-                        const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + UEL));
-                        map.addOverlay(marker);
+                        let pushpin = new Microsoft.Maps.Pushpin(point, {
+                            icon: "img/trophy/uel-trophy.svg",
+                            anchor: new Microsoft.Maps.Point(deltax, 15)
+                        })
+                        let description = showTitleInfo(name, UEL);
+                        let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false});
+                        infobox.setMap(map);
+                        Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({ visible: true });
+                        });
+                        map.entities.push(pushpin);
+
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, UEL);
+
                         document.getElementById("uel").onclick = centerOnTeam;
                         document.getElementById("uel").src = "img/trophy/uel-trophy.svg";
                     }
 
                     if (name === FA_final[season][0]) {
-                        const uccImg = new BMap.Icon("img/trophy/fa-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
-                        const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + FA));
-                        map.addOverlay(marker);
+                        let pushpin = new Microsoft.Maps.Pushpin(point, {
+                            icon: "img/trophy/fa-trophy.svg",
+                            anchor: new Microsoft.Maps.Point(deltax, 15)
+                        })
+                        let description = showTitleInfo(name, FA);
+                        let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false});
+                        infobox.setMap(map);
+                        Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({ visible: true });
+                        });
+                        map.entities.push(pushpin);
+
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, FA);
                         document.getElementById("fa").onclick = centerOnTeam;
                         document.getElementById("fa").src = "img/trophy/fa-trophy.svg";
                     }
 
                     if (name === EFL_final[season][0]) {
-                        const uccImg = new BMap.Icon("img/trophy/efl-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
-                        const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + EFL));
-                        map.addOverlay(marker);
+                        let pushpin = new Microsoft.Maps.Pushpin(point, {
+                            icon: "img/trophy/efl-trophy.svg",
+                            anchor: new Microsoft.Maps.Point(deltax, 15)
+                        })
+                        let description = showTitleInfo(name, EFL);
+                        let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false});
+                        infobox.setMap(map);
+                        Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({ visible: true });
+                        });
+                        map.entities.push(pushpin);
+
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, EFL);
                         document.getElementById("efl").onclick = centerOnTeam;
                         document.getElementById("efl").src = "img/trophy/efl-trophy.svg";
                     }
 
                     if (CWC_final[season]!==undefined && name === CWC_final[season][0]) {
-                        const uccImg = new BMap.Icon("img/trophy/cwc-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
-                        const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + CWC));
-                        map.addOverlay(marker);
+                        let pushpin = new Microsoft.Maps.Pushpin(point, {
+                            icon: "img/trophy/cwc-trophy.svg",
+                            anchor: new Microsoft.Maps.Point(deltax, 15)
+                        })
+                        let description = showTitleInfo(name, CWC);
+                        let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false});
+                        infobox.setMap(map);
+                        Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({ visible: true });
+                        });
+                        map.entities.push(pushpin);
+
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, CWC);
                         document.getElementById("cwc").onclick = centerOnTeam;
                         document.getElementById("cwc").src = "img/trophy/cwc-trophy.svg";
                     }
 
                     if (name === FCWC_title[season]) {
-                        const uccImg = new BMap.Icon("img/trophy/fcwc-trophy.svg", new BMap.Size(23, 35), {anchor: new BMap.Size(deltax, 15)});
-                        const marker = new BMap.Marker(point, {icon: uccImg});
-                        marker.setTitle(i18next.t("title." + FCWC));
-                        map.addOverlay(marker);
+                        let pushpin = new Microsoft.Maps.Pushpin(point, {
+                            icon: "img/trophy/fcwc-trophy.svg",
+                            anchor: new Microsoft.Maps.Point(deltax, 15)
+                        })
+                        let description = showTitleInfo(name, FCWC);
+                        let infobox = new Microsoft.Maps.Infobox(point, {title: name, description, visible: false});
+                        infobox.setMap(map);
+                        Microsoft.Maps.Events.addHandler(pushpin, 'click', function () {
+                        infobox.setOptions({ visible: true });
+                        });
+                        map.entities.push(pushpin);
+
                         deltax -= 24;
-                        (showTitleInfo)(marker, name, FCWC);
                         document.getElementById("fcwc").onclick = centerOnTeam;
                         document.getElementById("fcwc").src = "img/trophy/fcwc-trophy.svg";
                     }
 
-                    (function () {
-                        marker.addEventListener("click", function () {
-                            showInfo(this, team);
-                        });
-                    })();
 
                 });
             }
 
             //显示信息窗口，显示标注点的信息。
-            function showInfo(thisMarker, team) {
+            function getTeamInfo(team) {
                 const name = team.team.name;
                 const position = team.position;
 
@@ -467,7 +489,7 @@
                     eplContent +=
                         '<tr>'
                         + '<th>' + i18next.t('other.' + "Latest Title") + '</th>'
-                        + '<td>' + all_latest_all[name].season+ " " + i18next.t('title.' + all_latest_all[name].title) + '</td>'
+                        + '<td>' + all_latest_all[name].season + " " + i18next.t('title.' + all_latest_all[name].title) + '</td>'
                         + '</tr>';
                 }
 
@@ -514,31 +536,31 @@
                         + '</tr>';
                 }
 
-              let derbyContent="";
-              if(derby[name]!==undefined){
-                let keys=Object.keys(derby[name]);
-                for(let i=0;i<keys.length;i++){
-                  let derbyName=keys[i];
-                  let rivals_list=[];
-                  derby[name][derbyName].forEach((t,_1,_2)=>{
-                    rivals_list.push(i18next.t(['team.'+t,"englandTeam."+t],t));
-                  });
-                  let rivals=rivals_list.join(',');
-                  if(i===0){
-                  derbyContent+=
-                          '<tr class="separated">'
-                        + '<th>' +derbyName+":" + '</th>'
-                        + '<td>' + rivals + '</td>'
-                        + '</tr>';
-                  }else{
-                  derbyContent+=
-                          '<tr>'
-                        + '<th>' +derbyName+":" + '</th>'
-                        + '<td>' + rivals + '</td>'
-                        + '</tr>';
-                  }
+                let derbyContent = "";
+                if (derby[name] !== undefined) {
+                    let keys = Object.keys(derby[name]);
+                    for (let i = 0; i < keys.length; i++) {
+                        let derbyName = keys[i];
+                        let rivals_list = [];
+                        derby[name][derbyName].forEach((t, _1, _2) => {
+                            rivals_list.push(i18next.t(['team.' + t, "englandTeam." + t], t));
+                        });
+                        let rivals = rivals_list.join(',');
+                        if (i === 0) {
+                            derbyContent +=
+                                '<tr class="separated">'
+                                + '<th>' + derbyName + ":" + '</th>'
+                                + '<td>' + rivals + '</td>'
+                                + '</tr>';
+                        } else {
+                            derbyContent +=
+                                '<tr>'
+                                + '<th>' + derbyName + ":" + '</th>'
+                                + '<td>' + rivals + '</td>'
+                                + '</tr>';
+                        }
+                    }
                 }
-              }
 
                 let sContent =
                     '<h2>'
@@ -565,9 +587,7 @@
                     + derbyContent
                     + '</table>';
 
-
-                let infoWindow = new BMap.InfoWindow(sContent, {enableMessage: false});// 创建信息窗口对象
-                thisMarker.openInfoWindow(infoWindow);//图片加载完毕重绘infowindow
+                return sContent;
             }
 
 

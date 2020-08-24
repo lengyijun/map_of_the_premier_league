@@ -1,6 +1,6 @@
 # Premier League Map
 
-![gif](screenshots/out.gif)
+![gif](screenshots/bing/out.gif)
 
 
 #### Introduction
@@ -26,7 +26,7 @@ Data from the premier league website and Wikipedia.
 
 
 #### How to use ?
-![gif](screenshots/record.gif)
+![gif](screenshots/baidu/record.gif)
 
 
 #### Abbreviation 
