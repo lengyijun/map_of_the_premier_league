@@ -41,4 +41,5 @@ promotion 2015-16.json   2016-17.json
 promotion 2016-17.json   2017-18.json
 promotion 2017-18.json   2018-19.json
 promotion 2018-19.json   2019-20.json
+promotion 2019-20.json   2020-21.json
 echo '};'

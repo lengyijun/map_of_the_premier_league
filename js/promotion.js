@@ -53,4 +53,6 @@ const promotion={"1992-93":["Ipswich Town","Middlesbrough","Blackburn Rovers"],
 "Cardiff City","Fulham","Wolverhampton Wanderers",],
 "2019-20":[
 "Aston Villa","Norwich City","Sheffield United",],
+"2020-21":[
+"Fulham","Leeds United","West Bromwich Albion",],
 };

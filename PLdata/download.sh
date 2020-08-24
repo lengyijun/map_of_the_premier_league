@@ -22,7 +22,7 @@ for i in {1..27}; do
    
 done
 
-# curl 'https://footballapi.pulselive.com/football/standings?compSeasons="%i"&altIds=true&detail=2&FOOTBALL_COMPETITION=1' \
+# curl 'https://footballapi.pulselive.com/football/standings?compSeasons=27&altIds=true&detail=2&FOOTBALL_COMPETITION=1' \
   # -H 'authority: footballapi.pulselive.com' \
   # -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36' \
   # -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
