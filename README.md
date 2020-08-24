@@ -4,7 +4,7 @@
 
 
 #### Introduction
-From 1992 to this season, the Premier League teams and their home courts are mapped.
+From 1992 to this season, the Premier League teams and their home courts are beautifully mapped.
 
 Click on the team icon to see the data of the Champions League, Europa League, Champions Cup, Premier League, FA Cup, Club World Cup.
 
@@ -21,8 +21,9 @@ Data from the premier league website and Wikipedia.
 - To the last champion
 - To the last league title of the season
 - The number and year of each Championship
-- Promotion and degration
+- Promotion and degradation
 - Derby opponents
+
 
 #### How to use ?
 ![gif](screenshots/record.gif)
