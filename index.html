@@ -157,7 +157,7 @@
         let honorHtml = `
     <div id="honor">
       <img id="ucl"  src="img/trophy-grey/ucl-trophy.svg" width="50px" />
-      <img id="pl"   src="img/trophy/pl-trophy.svg"  width="50px" />
+      <img id="pl"   src="img/trophy-grey/pl-trophy.svg"  width="50px" />
       <img id="uel"  src="img/trophy-grey/uel-trophy.svg" width="50px" />
       <img id="cwc"  src="img/trophy-grey/cwc-trophy.svg" width="50px" />
       <img id="fa"   src="img/trophy-grey/fa-trophy.svg"  width="50px" />
@@ -276,6 +276,7 @@
         document.getElementById("ucl").src = "img/trophy-grey/ucl-trophy.svg";
         document.getElementById("uel").src = "img/trophy-grey/uel-trophy.svg";
         document.getElementById("cwc").src = "img/trophy-grey/cwc-trophy.svg";
+        document.getElementById("pl").src = "img/trophy-grey/pl-trophy.svg";
         document.getElementById("fa").src = "img/trophy-grey/fa-trophy.svg";
         document.getElementById("efl").src = "img/trophy-grey/efl-trophy.svg";
         document.getElementById("fcwc").src = "img/trophy-grey/fcwc-trophy.svg";
@@ -343,6 +344,7 @@
                         deltax -= 24;
                         (showTitleInfo)(marker, name, PL);
                         document.getElementById("pl").onclick = centerOnTeam;
+                        document.getElementById("pl").src = "img/trophy/pl-trophy.svg";
 
                         <!-- 改变地图配色 -->
                         <!-- $.getJSON(name+".json",function(styleJson){ -->
