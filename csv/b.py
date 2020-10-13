@@ -5,6 +5,8 @@ import json
 from collections import defaultdict
 
 OUTPUT="../js/autogenerate.js"
+DERBY_OUTPUT="../js/derby.js"
+FOUNDATION_OUTPUT="../js/foundation.js"
 
 PL = "Premier League"
 APL = "Premier League"
@@ -165,13 +167,32 @@ def derby():
     buffer+=";\n"
     return buffer
 
-
+def foundation():
+    filename="foundation.csv"
+    mp={}
+    buffer="const foundation="
+    with open(filename, encoding='utf-8') as f:
+        reader = csv.reader(f)
+        for row in reader:
+            if row[0][0]=='#':
+                continue
+            team=row[0]
+            year=row[1]
+            mp[team]=year
+    buffer+=json.dumps(mp)
+    buffer+=";\n"
+    return buffer
 
 if __name__ == '__main__':
+    s=foundation()
+    with open(FOUNDATION_OUTPUT,mode="w", encoding='utf-8') as f:
+        f.write(s)
+
+    s=derby()
+    with open(DERBY_OUTPUT,mode="w", encoding='utf-8') as f:
+        f.write(s)
+
     s=""
-
-    s+=derby()
-
     s+=cnt('PL.txt')
 
     s+=title_list('UCL.csv')
