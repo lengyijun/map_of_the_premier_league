@@ -59,6 +59,75 @@
 <div id="container"></div>
 
 <script type="text/javascript">
+  let mp={
+      1992:"1992-93",
+      1993:"1993-94",
+      1994:"1994-95",
+      1995:"1995-96",
+      1996:"1996-97",
+      1997:"1997-98",
+      1998:"1998-99",
+      1999:"1999-2000",
+      2000:"2000-01",
+      2001:"2001-02",
+      2002:"2002-03",
+      2003:"2003-04",
+      2004:"2004-05",
+      2005:"2005-06",
+      2006:"2006-07",
+      2007:"2007-08",
+      2008:"2008-09",
+      2009:"2009-10",
+      2010:"2010-11",
+      2011:"2011-12",
+      2012:"2012-13",
+      2013:"2013-14",
+      2014:"2014-15",
+      2015:"2015-16",
+      2016:"2016-17",
+      2017:"2017-18",
+      2018:"2018-19",
+      2019:"2019-20",
+      2020:"2020-21",
+    };
+    var YEAR=2019;
+    document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            console.log(YEAR);
+            //console.log(e.keyCode);
+
+            // Left 37
+            // Up 38
+            // Right 39
+            // Down 40
+            if(e && (e.keyCode===37 || e.keyCode===38) ){
+                if(YEAR>1992){
+                    YEAR--;
+                    let season=mp[YEAR];
+                    //document.querySelector('#year [value="' + season + '"]').selected = true;
+
+                    //works
+                    //document.getElementById('year').value =season; 
+                    //updateMap(season);
+
+                    //works
+                    $('#year').val(season).change();
+                  }
+            }
+            //else if(e && (e.keyCode===39 || e.keyCode===40) ){
+            //    if(YEAR<2020){
+            //        YEAR++;
+            //        let season=mp[YEAR];
+            //        document.querySelector('#year [value="' + season + '"]').selected = true;
+            //        //document.getElementById('year').value =season; 
+            //        //$('#year').val(season).change();
+            //        //updateMap(season);
+            //      }
+            //}
+            console.log(YEAR);
+        
+        };
+
     //show in console
     console.log(logo)
     console.log("source code: https://github.com/lengyijun/map_of_the_premier_league");
@@ -266,6 +335,7 @@
 
 
     function updateMap(season) {
+        console.trace();
         map.clearOverlays();
         document.getElementById("ucl").onclick = undefined;
         document.getElementById("uel").onclick = undefined;
@@ -284,7 +354,7 @@
         document.getElementById("fcwc").src = "img/trophy-grey/fcwc-trophy.svg";
 
         const filename = "PLdata/" + season + ".json";
-        const year = parseInt(season);
+        YEAR= parseInt(season);
         let showTitleInfo = _showTitleInfo(season);
 
 
@@ -429,7 +499,7 @@
                 }
 
                 function isDegradation() {
-                    return (year === 1994 && position >= 19) || (year < 1994 && position >= 20) || (year > 1994 && position >= 18);
+                    return (YEAR === 1994 && position >= 19) || (YEAR < 1994 && position >= 20) || (YEAR > 1994 && position >= 18);
                 }
 
 
