@@ -322,7 +322,7 @@
                     const anchor = new BMap.Size(25, heightOffset[groundName]);
                     heightOffset[groundName] -= 50;
 
-                    const iconImg = new BMap.Icon("./img/x2/" + team.team.altIds.opta + "@x2.png", new BMap.Size(50, 50), {anchor});
+                    const iconImg = new BMap.Icon("./img/"+season+"/" + team.team.altIds.opta + "@x2.png", new BMap.Size(50, 50), {anchor});
                     marker = new BMap.Marker(point, {icon: iconImg});
                     map.addOverlay(marker);
 
