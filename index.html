@@ -114,16 +114,16 @@
                     $('#year').val(season).change();
                   }
             }
-            //else if(e && (e.keyCode===39 || e.keyCode===40) ){
-            //    if(YEAR<2020){
-            //        YEAR++;
-            //        let season=mp[YEAR];
-            //        document.querySelector('#year [value="' + season + '"]').selected = true;
-            //        //document.getElementById('year').value =season; 
-            //        //$('#year').val(season).change();
-            //        //updateMap(season);
-            //      }
-            //}
+            else if(e && (e.keyCode===39 || e.keyCode===40) ){
+                if(YEAR<2020){
+                    YEAR++;
+                    let season=mp[YEAR];
+                    $('#year').val(season).change();
+                    //document.querySelector('#year [value="' + season + '"]').selected = true;
+                    //document.getElementById('year').value =season; 
+                    //updateMap(season);
+                  }
+            }
             console.log(YEAR);
         
         };
