@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="description" content="英超球队都在哪里?英超地图可视化的展示了从1992-2019每个赛季的英超球队主场分布.点击球队队徽可以看到当赛季球队的荣誉(欧冠，欧联，优胜者杯，英超，足总杯，联赛杯，世俱杯)和历史荣誉(最近一座冠军,最近一座联赛冠军)">
+    <meta name="description" content="英超球队都在哪里?英超地图可视化的展示了从1992-2020每个赛季的英超球队主场分布.点击球队队徽可以看到当赛季球队的荣誉(欧冠，欧联，优胜者杯，英超，足总杯，联赛杯，世俱杯)和历史荣誉(最近一座冠军,最近一座联赛冠军)">
     <meta name="keywords" content="英超球队分布,英超地图,英超地理,英超历史,英超分布,英超俱乐部地图,英超球队地理分布,英超球队所在地,英超20强,英格兰足球地图" />
     <title>英超地图 1992-2020</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
@@ -90,7 +90,7 @@
       2019:"2019-20",
       2020:"2020-21",
     };
-    var YEAR=2019;
+    var YEAR=2020;
     document.onkeydown=function(event){
             var e = event || window.event || arguments.callee.caller.arguments[0];
             console.log(YEAR);
@@ -165,7 +165,7 @@
             document.getElementById("efl").title = i18next.t("title.English Football League Cup");
             document.getElementById("fcwc").title = i18next.t("title.FIFA Club World Cup");
 
-            updateMap("2019-20");
+            updateMap("2020-21");
         });
 
 
@@ -193,8 +193,8 @@
         const yearHtml =
             `
     <select id="year" onChange="updateMap(this.value);" >
-      <option value="2020-21">2020-21</option>
-      <option value="2019-20" selected="selected">2019-20</option>
+      <option value="2020-21" selected="selected">2020-21</option>
+      <option value="2019-20">2019-20</option>
       <option value="2018-19">2018-19</option>
       <option value="2017-18">2017-18</option>
       <option value="2016-17">2016-17</option>

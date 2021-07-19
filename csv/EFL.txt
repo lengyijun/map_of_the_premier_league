@@ -58,4 +58,4 @@
 2017-18,Manchester City,3–0,Arsenal,Wembley Stadium,"85,671"
 2018-19,Manchester City,0–0,Chelsea,Wembley Stadium,"81,775"
 2019-20,Manchester City,2–1,Aston Villa,Wembley Stadium,"82,145"
-2020-21,DUMMY,2–1,DUMMY,Wembley Stadium,"82,145"
+2020-21,Manchester City,1–0,Tottenham Hotspur,Wembley Stadium,"82,145"

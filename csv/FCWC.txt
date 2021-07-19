@@ -14,4 +14,4 @@
 2017-18,Real Madrid,1–0,Grêmio,Pachuca,4–1,Al-Jazira
 2018-19,Real Madrid,4–1,Al-Ain,River Plate,4–0,Kashima Antlers
 2019-20,Liverpool,1–0,Flamengo,Monterrey,2–2,Al-Hilal
-2020-21,DUMMY,1–0,DUMMY,Monterrey,2–2,Al-Hilal
+2020-21,Bayern Munich,1–0,UANL,Al Ahly,0–0,Palmeiras

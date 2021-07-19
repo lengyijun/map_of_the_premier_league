@@ -95,3 +95,4 @@
 2017-18,Arsenal,1–1,Chelsea,Wembley Stadium (new),"83,325"
 2018-19,Manchester City,2–0,Chelsea,Wembley Stadium (new),"72,724"
 2019-20,Manchester City,1–1,Liverpool,Wembley Stadium (new),"77,565"
+2020-21,Arsenal,1–1,Liverpool,Wembley Stadium (new),"0"

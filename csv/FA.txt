@@ -151,4 +151,4 @@
 2017-18,Chelsea,1-0,Manchester United,Wembley Stadium (new),"87,647"
 2018-19,Manchester City,6-0,Watford,Wembley Stadium (new),"85,854"
 2019-20,Arsenal,2-1,Chelsea,Wembley Stadium (new),"85,854"
-2020-21,DUMMY,2-1,DUMMY,Wembley Stadium (new),"85,854"
+2020-21,Leicester City,1-0,Chelsea,Wembley Stadium (new),"85,854"
